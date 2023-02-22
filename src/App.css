@@ -1,0 +1,16 @@
+:root {
+  --color-primary-400: #6570ff;
+  --color-ui-400: #262e47;
+  --color-ui-500: #262e47;
+  --color-ui-600: #1c213e;
+  --color-ui-800: #171c32;
+}
+.App {
+  overflow: hidden;
+}
+html, body{
+  /* overflow: hidden; */
+}
+.linear_gradient, body {
+  background: linear-gradient(90deg, #6570ff, #750fbd, #c949f8);
+}

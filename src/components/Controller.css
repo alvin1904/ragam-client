@@ -1,0 +1,13 @@
+.audio_controller{
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+    height: 5rem;
+    background-color: var(--color-ui-400);
+    color: white;
+}
+@media(max-width: 1180px){
+    .audio_controller{
+        height: 10rem;
+    }
+}

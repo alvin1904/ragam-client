@@ -1,12 +1,14 @@
-import './App.css'
+import "./App.css";
+import Controller from './components/Controller'
+import AppInterface from './pages/AppInterface'
 
 function App() {
-
   return (
     <div className="App">
-      assd
+      <AppInterface />
+      <Controller />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
