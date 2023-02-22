@@ -30,7 +30,7 @@ body {
   margin: 0;
   padding: 0;
   font: inherit;
-  /* transition: all ease-in-out 250ms; */
+  transition: all ease-in-out 250ms;
 }
 
 /* Reapply the pointer cursor for anchor tags */

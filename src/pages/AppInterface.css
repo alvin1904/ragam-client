@@ -1,10 +1,23 @@
-.interface{
-    background-color: var(--color-ui-800);
-    width: 90vw;
-    height: 80vh;
+.interface {
+  background-color: var(--color-ui-800);
+  width: 90vw;
+  height: 80vh;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.05) 0px 8px 32px;
+  color: white;
+  overflow: hidden;
+}
+@media (max-width: 1180px) {
+  .interface {
+    all: unset;
+    width: 100vw;
+    height: 83vh;
     position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 15px;
+    background-color: var(--color-ui-800);
+  }
 }
