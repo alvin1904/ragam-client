@@ -1,14 +1,105 @@
-.audio_controller{
-    position: absolute;
-    bottom: 0%;
-    width: 100%;
-    height: 5rem;
-    background-color: var(--color-ui-400);
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
-    color: white;
+.audio_controller {
+  position: absolute;
+  bottom: 0%;
+  width: 100%;
+  height: 5rem;
+  background-color: var(--color-ui-400);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
+  color: white;
+  opacity: 0.97;
 }
-@media(max-width: 1180px){
-    .audio_controller{
-        height: 10rem;
-    }
+.audio_controller:hover {
+  opacity: 1;
+}
+@media (max-width: 1180px) {
+  .audio_controller {
+    height: 10rem;
+  }
+}
+
+.audio_slider {
+  position: absolute;
+  all: unset;
+  width: 100%;
+  height: 3.5px;
+  border-radius: 20px;
+  background-color: transparent;
+  transform: translateY(-16px);
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0.3;
+  transition: all ease-in-out 250ms;
+}
+.audio_slider:hover {
+  height: 4.75px;
+  opacity: 0.65;
+}
+.audio_slider::-webkit-slider-thumb {
+  appearance: none;
+  background: var(--color-ui-400);
+  height: 4px;
+  width: 4px;
+  border-radius: 50%;
+  box-shadow: -8000px 0 4px 8000px white;
+  background-color: white;
+  transition: all ease-in-out 250ms;
+}
+
+.audio_details {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: auto 1fr;
+  text-align: left;
+  transform: translateY(-18px);
+}
+
+.song_image {
+  border-radius: 10px;
+  height: 70px;
+  width: 70px;
+  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  object-fit:cover;
+}
+.song_image img {
+  flex-shrink: 0;
+  flex-grow: 1;
+  min-width: 100%;
+  min-height: 100%;
+}
+.song_title {
+  padding-left: 10px;
+}
+.song_title h1 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+.song_title p {
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.audio_tools {
+  text-align: center;
+}
+.audio_btn {
+  all: unset;
+  cursor: pointer;
+  background-color: transparent;
+}
+.audio_controls {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.audio_right {
+  text-align: end;
+  padding-right: 30px;
 }

@@ -4,13 +4,19 @@
   --color-ui-500: #262e47;
   --color-ui-600: #1c213e;
   --color-ui-800: #171c32;
+  font-family: "Raleway", sans-serif;
+}
+* {
+  font-family: "Raleway", sans-serif;
 }
 .App {
   overflow: hidden;
 }
-html, body{
-  /* overflow: hidden; */
+html,
+body {
+  overflow: hidden;
 }
-.linear_gradient, body {
+.linear_gradient,
+body {
   background: linear-gradient(90deg, #6570ff, #750fbd, #c949f8);
 }
