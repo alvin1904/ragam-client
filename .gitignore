@@ -40,3 +40,5 @@ yarn-error.log*
 /.changelog
 .npm/
 dist
+
+src/constants/njnuyarnupogum.mp3

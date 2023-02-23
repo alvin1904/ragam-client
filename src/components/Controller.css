@@ -44,13 +44,20 @@
   background-color: white;
   transition: all ease-in-out 250ms;
 }
+.audio_controls {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr 1fr 1fr;
+  transform: translateY(-18px);
+}
 
 .audio_details {
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: auto 1fr;
   text-align: left;
-  transform: translateY(-18px);
 }
 
 .song_image {
@@ -62,7 +69,7 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  object-fit:cover;
+  object-fit: cover;
 }
 .song_image img {
   flex-shrink: 0;
@@ -85,21 +92,28 @@
 
 .audio_tools {
   text-align: center;
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  padding: 0 8rem;
 }
 .audio_btn {
   all: unset;
   cursor: pointer;
   background-color: transparent;
+  height: auto;
+  width: fit-content;
+  border-radius: 50%;
 }
-.audio_controls {
-  height: 100%;
-  width: 100%;
-  display: grid;
-  grid-auto-flow: column;
-  grid-template-columns: 1fr 1fr 1fr;
+.pause:hover {
+  color: #9ee493;
 }
-
+.play:hover {
+  color: #ff6868;
+}
 .audio_right {
   text-align: end;
   padding-right: 30px;
+  align-items: center;
+  height: 100%;
 }
