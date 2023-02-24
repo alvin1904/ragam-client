@@ -1,7 +1,7 @@
 import "./Controller.css";
 import Controls from "./Controls";
 import { useState, useRef, useEffect } from "react";
-import song from "../constants/njnuyarnupogum.mp3";
+import songa from "../constants/njnuyarnupogum.mp3";
 
 const Controller = () => {
   const [playing, setPlaying] = useState(false);
@@ -9,6 +9,7 @@ const Controller = () => {
   const [duration, setDuration] = useState(0);
   const [looping, setLooping] = useState(false);
   const [shuffle, setShuffle] = useState(false);
+  const [song, setSong] = useState(songa);
 
   const link =
     "https://images.unsplash.com/photo-1677141216267-fab8433a646d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80";
@@ -44,6 +45,7 @@ const Controller = () => {
     return `${min}:${sec < 10 ? "0" : ""}${sec}`;
   };
 
+
   return (
     <div className="audio_controller">
       <audio autoPlay ref={audioRef} onTimeUpdate={handleTimeUpdate}>
@@ -78,7 +80,12 @@ const Controller = () => {
           setLooping={setLooping}
         />
 
-        <div className="audio_right">
+        <div
+          className="audio_right"
+          onClick={() => {
+            setSong(false);
+          }}
+        >
           {formatTime(time)} / {formatTime(duration)}
         </div>
       </div>
