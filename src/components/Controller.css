@@ -50,7 +50,7 @@
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: 1fr 1fr 1fr;
-  transform: translateY(-18px);
+  transform: translateY(-19px);
 }
 
 .audio_details {
@@ -79,10 +79,13 @@
 }
 .song_title {
   padding-left: 10px;
+  align-items: center;
+  padding-top: 0.8rem;
 }
 .song_title h1 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 600;
+  line-height: 1.8rem;
 }
 .song_title p {
   font-size: 0.8rem;
@@ -104,16 +107,19 @@
   height: auto;
   width: fit-content;
   border-radius: 50%;
+  transition: 200ms ease-in-out;
 }
 .pause:hover {
-  color: #9ee493;
+  color: #ddffdd;
 }
 .play:hover {
-  color: #ff6868;
+  color: #ffc0c0;
 }
 .audio_right {
   text-align: end;
   padding-right: 30px;
+  padding-top: 1.4rem;
   align-items: center;
   height: 100%;
+  font-size: 1.2rem;
 }

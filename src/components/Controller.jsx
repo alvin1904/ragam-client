@@ -1,12 +1,5 @@
 import "./Controller.css";
-import {
-  IoPlayCircle,
-  IoPauseCircle,
-  IoPlaySkipBackCircleSharp,
-  IoPlaySkipForwardCircleSharp,
-  IoShuffle,
-  IoRepeat,
-} from "react-icons/io5";
+import Controls from "./Controls";
 import { useState, useRef, useEffect } from "react";
 import song from "../constants/njnuyarnupogum.mp3";
 
@@ -42,6 +35,12 @@ const Controller = () => {
     setPlaying(true);
   };
 
+  const formatTime = (tym) => {
+    const min = Math.floor(tym / 60);
+    const sec = Math.floor(tym % 60);
+    return `${min}:${sec < 10 ? "0" : ""}${sec}`;
+  };
+
   return (
     <div className="audio_controller">
       <audio autoPlay ref={audioRef} onTimeUpdate={handleTimeUpdate}>
@@ -65,35 +64,16 @@ const Controller = () => {
             <p className="song_artist">Artist Name</p>
           </div>
         </div>
-        <div className="audio_tools">
-          <button className="audio_btn shuffle">
-            <IoShuffle size={28} />
-          </button>
-          <button className="audio_btn prev" onClick={handlePrev}>
-            <IoPlaySkipBackCircleSharp size={35} />
-          </button>
 
-          <button
-            className={`audio_btn ${playing ? "play" : "pause"}`}
-            accessKey="Space"
-            onClick={() => {
-              setPlaying(!playing);
-            }}
-            onKeyDown={(e) => {
-              if (e.key == "Space") setPlaying(!playing);
-            }}
-          >
-            {playing ? <IoPauseCircle size={35} /> : <IoPlayCircle size={35} />}
-          </button>
+        <Controls
+          setPlaying={setPlaying}
+          handlePrev={handlePrev}
+          playing={playing}
+        />
 
-          <button className="audio_btn next">
-            <IoPlaySkipForwardCircleSharp size={35} />
-          </button>
-          <button className="audio_btn loop">
-            <IoRepeat size={28} />
-          </button>
+        <div className="audio_right">
+          {formatTime(time)} / {formatTime(duration)}
         </div>
-        <div className="audio_right">sdgfdefgdf</div>
       </div>
     </div>
   );
