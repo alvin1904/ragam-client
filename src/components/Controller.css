@@ -3,13 +3,9 @@
   bottom: 0%;
   width: 100%;
   height: 5rem;
-  background-color: var(--color-ui-400);
+  background: linear-gradient(-90deg, var(--color-ui-400), var(--color-ui-500));
   box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
   color: white;
-  opacity: 0.97;
-}
-.audio_controller:hover {
-  opacity: 1;
 }
 @media (max-width: 1180px) {
   .audio_controller {
@@ -31,8 +27,8 @@
   transition: all ease-in-out 250ms;
 }
 .audio_slider:hover {
-  height: 4.75px;
-  opacity: 0.65;
+  height: 4px;
+  opacity: 0.85;
 }
 .audio_slider::-webkit-slider-thumb {
   appearance: none;
@@ -86,11 +82,13 @@
   font-size: 1.5rem;
   font-weight: 600;
   line-height: 1.8rem;
+  user-select: none;
 }
 .song_title p {
   font-size: 0.8rem;
   letter-spacing: 1px;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
 .audio_tools {
@@ -103,18 +101,25 @@
 .audio_btn {
   all: unset;
   cursor: pointer;
-  background-color: transparent;
   height: auto;
   width: fit-content;
   border-radius: 50%;
-  transition: 200ms ease-in-out;
 }
-.pause:hover {
-  color: #ddffdd;
+.audio_btn {
+  color: #bfbfbf;
+  transition: 250ms ease-in-out;
 }
-.play:hover {
-  color: #ffc0c0;
+.audio_btn:hover {
+  color: white;
 }
+
+.looping,
+.looping:hover,
+.shuffling,
+.shuffling:hover {
+  color: #c949f8;
+}
+
 .audio_right {
   text-align: end;
   padding-right: 30px;
@@ -122,4 +127,5 @@
   align-items: center;
   height: 100%;
   font-size: 1.2rem;
+  user-select: none;
 }

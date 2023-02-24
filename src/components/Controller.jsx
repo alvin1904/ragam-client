@@ -7,6 +7,9 @@ const Controller = () => {
   const [playing, setPlaying] = useState(false);
   const [time, setTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [looping, setLooping] = useState(false);
+  const [shuffle, setShuffle] = useState(false);
+
   const link =
     "https://images.unsplash.com/photo-1677141216267-fab8433a646d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80";
 
@@ -60,15 +63,19 @@ const Controller = () => {
             <img src={link}></img>
           </div>
           <div className="song_title">
-            <h1 className="song_name">Song Name</h1>
-            <p className="song_artist">Artist Name</p>
+            <h1 className="song_name ">Song Name</h1>
+            <p className="song_artist hover_effect_1">Artist Name</p>
           </div>
         </div>
 
         <Controls
+          playing={playing}
           setPlaying={setPlaying}
           handlePrev={handlePrev}
-          playing={playing}
+          shuffle={shuffle}
+          looping={looping}
+          setShuffle={setShuffle}
+          setLooping={setLooping}
         />
 
         <div className="audio_right">

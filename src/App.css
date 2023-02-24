@@ -20,3 +20,11 @@ body {
 body {
   background: linear-gradient(90deg, #6570ff, #750fbd, #c949f8);
 }
+
+.hover_effect_1, .audio_btn {
+  color: #bfbfbf;
+  transition: 250ms ease-in-out;
+}
+.hover_effect_1:hover, .audio_btn:hover {
+  color: white;
+}
