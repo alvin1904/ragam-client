@@ -21,7 +21,7 @@
     background-color: var(--color-ui-800);
   }
 }
-.interface_inside{
+.interface_inside {
   background-color: transparent;
   margin-left: 60px;
   margin-top: 50px;
@@ -30,15 +30,21 @@
   padding: 25px;
 }
 
-
-.error_intf{
+.error_intf {
   display: grid;
   justify-content: center;
   justify-items: center;
   text-align: center;
-  gap: 0.5rem;
   font-size: 2rem;
   margin-top: 2rem;
-  text-transform: uppercase;
   letter-spacing: 1px;
+}
+.loadinggif{
+  height: 250px;
+  width: 200px;
+}
+.errorgif{
+  margin-bottom: 2rem;
+  height: 155px;
+  width: 200px;
 }
