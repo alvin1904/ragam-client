@@ -29,3 +29,16 @@
   height: 100%;
   padding: 25px;
 }
+
+
+.error_intf{
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+  text-align: center;
+  gap: 0.5rem;
+  font-size: 2rem;
+  margin-top: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
