@@ -27,7 +27,7 @@
   height: auto;
   width: fit-content;
   border-radius: 50%;
-  color: #5d6681;
+  color: var(--color-ui-shade);
   transition: 250ms ease-in-out;
 }
 .sidebar_btn:hover,

@@ -4,6 +4,8 @@
   --color-ui-500: #262e47;
   --color-ui-600: #1c213e;
   --color-ui-800: #171c32;
+  --color-ui-shade: #5d6681;
+
   font-family: "Raleway", sans-serif;
 }
 * {

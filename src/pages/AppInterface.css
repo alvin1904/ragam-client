@@ -19,6 +19,7 @@
     height: 83vh;
     position: absolute;
     background-color: var(--color-ui-800);
+    transition: 250ms ease-in-out;
   }
 }
 .interface_inside {
