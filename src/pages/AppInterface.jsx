@@ -4,6 +4,7 @@ import Sidebar from "../components/Sidebar";
 import {
   Loading_Interface,
   Main_Interface,
+  Search_Interface,
   Profile_Interface,
   Settings_Interface,
   Error_Interface
@@ -40,6 +41,7 @@ const AppInterface = () => {
       <Sidebar interfaces={state.interface} changeInterface={changeInterface} />
       {state.interface == "Loading_Interface" && <Loading_Interface />}
       {state.interface == "Main_Interface" && <Main_Interface />}
+      {state.interface == "Search_Interface" && <Search_Interface />}
       {state.interface == "Profile_Interface" && <Profile_Interface />}
       {state.interface == "Settings_Interface" && <Settings_Interface />}
       {state.interface == "Error_Interface" && <Error_Interface />}

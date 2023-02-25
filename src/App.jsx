@@ -1,13 +1,27 @@
 import "./App.css";
-import Controller from './components/Controller'
-import AppInterface from './pages/AppInterface'
+import {
+  BrowserRouter as Router,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router-dom";
+import Home from './Home'
+import Login from './pages/Login'
+import Register from './pages/Register'
 
 function App() {
   return (
-    <div className="App">
-      <AppInterface />
-      <Controller />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={
+          <Navigate to={"/login"}/>
+        }/>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/home" element={<Home />} />
+
+      </Routes>
+    </Router>
   );
 }
 

@@ -1,5 +1,5 @@
 import "./Nav.css";
-import { MdSettings, MdAccountCircle, MdLibraryMusic } from "react-icons/md";
+import { MdSettings, MdAccountCircle, MdLibraryMusic, MdOutlineSearch } from "react-icons/md";
 
 const Sidebar = ({ interfaces, changeInterface }) => {
   const changePage = (page) => changeInterface(page);
@@ -12,6 +12,10 @@ const Sidebar = ({ interfaces, changeInterface }) => {
     {
       target: "Main_Interface",
       button: <MdLibraryMusic size={28} />,
+    },
+    {
+      target: "Search_Interface",
+      button: <MdOutlineSearch size={28} />,
     },
     {
       target: "Profile_Interface",

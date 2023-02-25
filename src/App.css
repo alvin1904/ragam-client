@@ -32,3 +32,6 @@ body {
   color: white;
   opacity: 1;
 }
+.transition_1{
+  transition: 250ms all ease-in-out;
+}

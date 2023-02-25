@@ -15,6 +15,11 @@ export const LoadReducer = (state, action) => {
         interface: "Main_Interface",
         data: action.payload,
       };
+    case "Search_Interface":
+      return {
+        interface: "Search_Interface",
+        data: action.payload,
+      };
     case "Profile_Interface":
       return {
         interface: "Profile_Interface",
@@ -40,5 +45,6 @@ export const LOAD_TYPES = {
   Main_Interface: "Main_Interface",
   Profile_Interface: "Profile_Interface",
   Settings_Interface: "Settings_Interface",
+  Search_Interface:"Search_Interface",
   Error_Interface: "Error_Interface",
 };
