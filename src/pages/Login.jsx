@@ -1,24 +1,26 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
+import { useUserAuthContext } from "../userAuth";
 
 export default function Login() {
   const navigate = useNavigate();
+  const [forgotP, setForgotP] = useState(false);
+  const [err, setErr] = useState("");
   const [details, setDetails] = useState({
     email: "",
     password: "",
   });
-  const [forgotP, setForgotP] = useState(false);
-  const [err, setErr] = useState("");
+  const { loginUser } = useUserAuthContext();
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (details.email == 0 || details.password == "")
       setErr("Enter credentials and try again");
     else if (details.password.length < 6) setErr("Enter a valid password");
     else {
       setErr("");
-      //send req
-      navigate("/home");
+      const token = await loginUser(details);
+      if (token.response.data.error) setErr(token.response.data.error);
     }
   };
   return (
