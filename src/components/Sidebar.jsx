@@ -1,8 +1,8 @@
 import "./Nav.css";
 import { MdSettings, MdAccountCircle, MdLibraryMusic } from "react-icons/md";
 
-const Sidebar = ({ interfaces, setInterfaces }) => {
-  const changePage = (page) => setInterfaces(page);
+const Sidebar = ({ interfaces, changeInterface }) => {
+  const changePage = (page) => changeInterface(page);
 
   const btns = [
     // {

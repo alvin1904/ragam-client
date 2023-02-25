@@ -1,23 +1,48 @@
 import "./AppInterface.css";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
-import Loading_Interface from "../components/interfaces/Loading_Interface";
-import Main_Interface from "../components/interfaces/Main_Interface";
-import Profile_Interface from "../components/interfaces/Profile_Interface";
-import Settings_Interface from "../components/interfaces/Settings_Interface";
-import { useState } from "react";
+import {
+  Loading_Interface,
+  Main_Interface,
+  Profile_Interface,
+  Settings_Interface,
+  Error_Interface
+} from "../components/interfaces/index";
+import { useReducer } from "react";
+import {
+  LoadReducer,
+  INITIAL_STATE,
+} from "../components/interfaces/LoadReducer";
 
 const AppInterface = () => {
-  const [interfaces, setInterfaces] = useState("Loading_Interface");
+  const [state, dispatch] = useReducer(LoadReducer, INITIAL_STATE);
+
+  const changeInterface = (target) => {
+    dispatch({ type: "Loading_Interface" });
+    fetch("https://jsonplaceholder.typicode.com/todos/1")
+      .then((response) => {
+        response.json();
+        console.log(response);
+      })
+      .then((json) => {
+        dispatch({ type: target, payload: json });
+        console.log(json);
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({ type: "Error_Interface" });
+      });
+  };
 
   return (
     <div className="interface">
       <Navbar />
-      <Sidebar interfaces={interfaces} setInterfaces={setInterfaces} />
-      {interfaces == "Loading_Interface" && <Loading_Interface />}
-      {interfaces == "Main_Interface" && <Main_Interface />}
-      {interfaces == "Profile_Interface" && <Profile_Interface />}
-      {interfaces == "Settings_Interface" && <Settings_Interface />}
+      <Sidebar interfaces={state.interface} changeInterface={changeInterface} />
+      {state.interface == "Loading_Interface" && <Loading_Interface />}
+      {state.interface == "Main_Interface" && <Main_Interface />}
+      {state.interface == "Profile_Interface" && <Profile_Interface />}
+      {state.interface == "Settings_Interface" && <Settings_Interface />}
+      {state.interface == "Error_Interface" && <Error_Interface />}
     </div>
   );
 };

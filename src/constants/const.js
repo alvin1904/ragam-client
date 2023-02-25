@@ -3,9 +3,3 @@ export const obj = {
   ArtistNotFound: "The artist you requested is not found.",
 };
 
-export const pages = [
-  "Loading_Interface",
-  "Main_Interface",
-  "Profile_Interface",
-  "Settings_Interface"
-];
