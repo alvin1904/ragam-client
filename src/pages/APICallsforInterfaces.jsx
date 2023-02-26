@@ -16,6 +16,7 @@ const APICallsforSignOut = async () => {
   try {
     const res = await logoutUserApi();
     setHead("");
+    console.log(res);
     if (res.status == 200) {
       localStorage.removeItem("details");
       localStorage.clear();

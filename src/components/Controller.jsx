@@ -11,9 +11,11 @@ const Controller = () => {
   const [shuffle, setShuffle] = useState(false);
   const [song, setSong] = useState(
     // "https://drive.google.com/file/d/1eFtUVyh-X1lVI6MtQr03u6vuFueDMg9t/view"
-    // "https://drive.google.com/uc?id=1QuB7d8kWkrhPXr985Fk0jauZVpFYXp18&export=stream"
+    // "https://drive.google.com/uc?id=1QuB7d8kWkrhPXr985Fk0jauZVpFYXp18&export=download"
+    "https://drive.google.com/uc?id=1l6pIxppZyuHAIvBap38g41181EGla-2N&export=download"
+    // "https://www.dropbox.com/s/43v06k35rbeon9u/3.mp3?raw=1"
     // songlink
-    "https://drive.google.com/file/d/1tkvKtt7Z-HO_8YHLkLKGkAvFdY_PfuyH/preview"
+    // "https://drive.google.com/file/d/1tkvKtt7Z-HO_8YHLkLKGkAvFdY_PfuyH/preview"
   );
 
   const link =

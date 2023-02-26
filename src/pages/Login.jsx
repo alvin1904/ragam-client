@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import { useUserAuthContext } from "../userAuth";
+import { getDetails, setHead } from "../apis";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -13,6 +14,22 @@ export default function Login() {
   });
   const { loginUser } = useUserAuthContext();
 
+  useEffect(() => {
+    let temp = localStorage.getItem("details");
+    if (temp) {
+      let token = JSON.parse(temp).token;
+      setHead(token);
+      getDetails()
+        .then((res) => {
+          if (res.status == 200 && res.data) navigate("/home");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    //CHECKING IF THERE IS A TOKEN IN STORAGE
+  }, []);
+
   const handleLogin = async () => {
     if (details.email == 0 || details.password == "")
       setErr("Enter credentials and try again");
@@ -20,7 +37,7 @@ export default function Login() {
     else {
       setErr("");
       const res = await loginUser(details);
-      if (res && res.data) {
+      if (res && res.data && res.status == 200) {
         navigate("/home");
       } else if (
         res &&

@@ -22,8 +22,8 @@ const AppProvider = ({ children }) => {
           verified: true,
           token: response.data.token,
         };
+        await addtoLocalStorage(temp);
         setUser(temp);
-        addtoLocalStorage(temp);
       }
       return response;
     } catch (err) {
@@ -45,11 +45,11 @@ const AppProvider = ({ children }) => {
     try {
       data.token && setHead(data.token);
       const response = await getDetails();
-      let temp = JSON.stringify(response.data);
-      console.log(temp);
-      localStorage.setItem("details", temp);
+      let temp = response.data;
+      temp.token = data.token;
+      localStorage.setItem("details", JSON.stringify(temp));
     } catch (err) {
-      alert("token expire or net down")
+      alert("token expire or net down");
       console.log(err);
     }
   };
