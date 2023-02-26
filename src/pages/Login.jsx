@@ -19,8 +19,17 @@ export default function Login() {
     else if (details.password.length < 6) setErr("Enter a valid password");
     else {
       setErr("");
-      const token = await loginUser(details);
-      if (token.response.data.error) setErr(token.response.data.error);
+      const res = await loginUser(details);
+      if (res && res.data) {
+        navigate("/home");
+      } else if (
+        res &&
+        res.response &&
+        res.response.data &&
+        res.response.data.error
+      )
+        setErr(res.response.data.error);
+      else setErr("Unknown error");
     }
   };
   return (

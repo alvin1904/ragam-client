@@ -1,33 +1,49 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
+import { useUserAuthContext } from "../userAuth";
 
 export default function Register() {
-  const navigate = useNavigate();
   const [details, setDetails] = useState({
-    name: "",
     email: "",
     password: "",
     password1: "",
+    name: "",
   });
   const [err, setErr] = useState("");
+  const { registerUser } = useUserAuthContext();
+  const navigate = useNavigate();
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
+    let flag = false;
     if (details.password == "" || details.email == "" || details.name == "")
-      setErr("Enter credentials and try again");
+      return setErr("Enter credentials and try again");
     else if (details.password.length < 6)
-      setErr("Password should be min 6 chars long");
+      return setErr("Password should be min 6 chars long");
     else if (details.password !== details.password1) {
-      setErr("The passwords do not match");
-    } else {
-      setErr(false);
-      //send req
-      navigate("/login");
+      return setErr("The passwords do not match");
     }
+    setErr("");
+    let temp = {...details};
+    delete temp.password1;
+    const res = await registerUser(temp);
+    if (res && res.data && res.status == 201) {
+      flag = true;
+    } else if (
+      res &&
+      res.response &&
+      res.response.data &&
+      res.response.data.error
+    )
+      return setErr(res.response.data.error);
+    else return setErr("Unknown error");
+
+    if (flag) navigate("/login");
   };
 
   return (
     <div className="login">
+      {console.log(details)}
       <section className="login_section register_section">
         <h1>Register</h1>
         <div className="login_form transition_1">

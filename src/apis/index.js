@@ -11,7 +11,7 @@ const api = axios.create({
 });
 
 export const loginUserApi = (data) => api.post("/api/v1/user/auth/login", data);
-export const registerUserApi = (data) => api.post("/api/v1/user/auth/login", data);
+export const registerUserApi = (data) => api.post("/api/v1/user/auth/register", data);
 
 export const addTodo = (data) => api.post("/todo/new", data);
 export const deleteTodo = (id) => api.delete(`/todo/delete/${id}`);

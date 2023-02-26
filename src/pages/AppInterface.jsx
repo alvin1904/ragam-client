@@ -7,7 +7,7 @@ import {
   Search_Interface,
   Profile_Interface,
   Settings_Interface,
-  Error_Interface
+  Error_Interface,
 } from "../components/interfaces/index";
 import { useReducer } from "react";
 import {
@@ -20,19 +20,20 @@ const AppInterface = () => {
 
   const changeInterface = (target) => {
     dispatch({ type: "Loading_Interface" });
-    fetch("https://jsonplaceholder.typicode.com/todos/1")
-      .then((response) => {
-        response.json();
-        console.log(response);
-      })
-      .then((json) => {
-        dispatch({ type: target, payload: json });
-        console.log(json);
-      })
-      .catch((err) => {
-        console.log(err);
-        dispatch({ type: "Error_Interface" });
-      });
+    try {
+      // let data;
+      // if ((target = "Main_Interface")) {
+      //   data = forMain();
+      //   console.log(data);
+      // }
+      // else{
+      //   data={q: "adfad"}
+      // }
+    } catch (err) {
+      console.log(err);
+      dispatch({ type: "Error_Interface" });
+    }
+    dispatch({ type: target, payload: data });
   };
 
   return (
