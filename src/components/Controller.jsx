@@ -30,7 +30,7 @@ const Controller = () => {
 
   const handleTimeUpdate = () => {
     setTime(audioRef.current.currentTime);
-    if (audioRef.current.duration != NaN)
+    // if (audioRef.current.duration != NaN)
       setDuration(audioRef.current.duration);
   };
   const handleSeek = (e) => {
@@ -48,7 +48,7 @@ const Controller = () => {
   };
 
   const formatTime = (tym) => {
-    if (tym == NaN) return "00:00";
+    // if (tym == NaN) return "00:00";
     const min = Math.floor(tym / 60);
     const sec = Math.floor(tym % 60);
     return `${min}:${sec < 10 ? "0" : ""}${sec}`;

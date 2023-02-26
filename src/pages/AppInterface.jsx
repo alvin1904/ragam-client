@@ -48,12 +48,10 @@ const AppInterface = () => {
           data = APICallsforSettings();
           break;
         case "Sign_Out":
-          console.log("signout please");
           data = APICallsforSignOut();
-          console.log(data);
           return navigate("/login");
         default:
-          data={}  
+          data = {};
       }
     } catch (err) {
       data = { ...err };

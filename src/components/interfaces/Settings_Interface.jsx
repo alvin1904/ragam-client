@@ -1,12 +1,8 @@
 import React, { useState } from "react";
+import "./Profile.css";
 
 export default function Settings({ data }) {
-  console.log(data);
-  const details = {
-    name: "Alvin Varghese",
-    email: "alvin19official@gmail.com",
-    verified: false,
-  };
+  const [details, setDetails] = useState(data);
 
   const [changeCredentials, setChangedCredentials] = useState({
     username: "",
@@ -42,12 +38,13 @@ export default function Settings({ data }) {
       <div className="settings_intf">
         <div className="profile_section">
           <h1 className="profile_welcome_main">
-            Hey {details.name.substring(0, details.name.indexOf(" "))},
+            Hey{" "}
+            {details && details.name && details.name.substring(0, details.name.indexOf(" "))},
           </h1>
           <div className="profile_subsection">
             <h1 className="profile_welcome">Change Username: </h1>
             <span>Old username:</span>
-            <span className="p"> {details.name}</span>
+            <span className="p"> {details && details.name}</span>
             <br></br>
             <br></br>
             <span>New username:</span>

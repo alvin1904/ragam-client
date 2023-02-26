@@ -53,11 +53,17 @@ const AppProvider = ({ children }) => {
       console.log(err);
     }
   };
+
   const getUser = () => user;
 
   return (
     <AppContext.Provider
-      value={{ getUser, addtoLocalStorage, loginUser, registerUser }}
+      value={{
+        getUser,
+        addtoLocalStorage,
+        loginUser,
+        registerUser,
+      }}
     >
       {children}
     </AppContext.Provider>
