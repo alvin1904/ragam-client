@@ -1,6 +1,7 @@
 import React from "react";
 
-export default function Search_Interface() {
+export default function Search_Interface({data}) {
+  console.log(data)
   return (
     <div className="interface_inside">
       Search_Interface dsghjsdfg Lorem ipsum dolor sit amet consecterspiciatis,

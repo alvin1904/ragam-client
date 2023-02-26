@@ -1,7 +1,10 @@
 import React from "react";
 import "./Profile.css";
 
-export default function Profile_Interface() {
+export default function Profile_Interface({data}) {
+
+  console.log(data)
+  
   const details = {
     name: "Alvin Varghese",
     email: "alvin19official@gmail.com",

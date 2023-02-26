@@ -1,7 +1,9 @@
 import React from "react";
 import loadingGIF from '../../assets/loading.gif'
 
-export default function Loading_Interface() {
+export default function Loading_Interface({data}) {
+
+  console.log(data)
   return (
     <div className="interface_inside">
       <div className="error_intf">

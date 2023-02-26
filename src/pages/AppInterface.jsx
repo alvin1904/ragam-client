@@ -1,6 +1,13 @@
 import "./AppInterface.css";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
+import { useReducer, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import {
+  LoadReducer,
+  INITIAL_STATE,
+} from "../components/interfaces/LoadReducer";
 import {
   Loading_Interface,
   Main_Interface,
@@ -9,28 +16,47 @@ import {
   Settings_Interface,
   Error_Interface,
 } from "../components/interfaces/index";
-import { useReducer } from "react";
 import {
-  LoadReducer,
-  INITIAL_STATE,
-} from "../components/interfaces/LoadReducer";
+  APICallsforMain,
+  APICallsforProfile,
+  APICallsforSearch,
+  APICallsforSettings,
+  APICallsforSignOut,
+} from "../pages/APICallsforInterfaces";
+// import { useUserAuthContext } from "../userAuth";
 
 const AppInterface = () => {
+  // const { addtoLocalStorage } = useUserAuthContext();
+  const navigate = useNavigate();
   const [state, dispatch] = useReducer(LoadReducer, INITIAL_STATE);
-
+  const [errors, setErrors] = useState("a big error");
   const changeInterface = (target) => {
     dispatch({ type: "Loading_Interface" });
+    let data = {};
     try {
-      // let data;
-      // if ((target = "Main_Interface")) {
-      //   data = forMain();
-      //   console.log(data);
-      // }
-      // else{
-      //   data={q: "adfad"}
-      // }
+      switch (target) {
+        case "Main_Interface":
+          data = APICallsforMain();
+          break;
+        case "Search_Interface":
+          data = APICallsforSearch();
+          break;
+        case "Profile_Interface":
+          data = APICallsforProfile();
+          break;
+        case "Settings_Interface":
+          data = APICallsforSettings();
+          break;
+        case "Sign_Out":
+          console.log("signout please");
+          data = APICallsforSignOut();
+          console.log(data);
+          return navigate("/login");
+        default:
+          data={}  
+      }
     } catch (err) {
-      console.log(err);
+      data = { ...err };
       dispatch({ type: "Error_Interface" });
     }
     dispatch({ type: target, payload: data });
@@ -40,12 +66,25 @@ const AppInterface = () => {
     <div className="interface">
       <Navbar />
       <Sidebar interfaces={state.interface} changeInterface={changeInterface} />
-      {state.interface == "Loading_Interface" && <Loading_Interface />}
-      {state.interface == "Main_Interface" && <Main_Interface />}
-      {state.interface == "Search_Interface" && <Search_Interface />}
-      {state.interface == "Profile_Interface" && <Profile_Interface />}
-      {state.interface == "Settings_Interface" && <Settings_Interface />}
-      {state.interface == "Error_Interface" && <Error_Interface />}
+      {state.interface == "Loading_Interface" && (
+        <Loading_Interface data={state.data} />
+      )}
+      {state.interface == "Main_Interface" && (
+        <Main_Interface data={state.data} />
+      )}
+      {state.interface == "Search_Interface" && (
+        <Search_Interface data={state.data} />
+      )}
+      {state.interface == "Profile_Interface" && (
+        <Profile_Interface data={state.data} />
+      )}
+      {state.interface == "Settings_Interface" && (
+        <Settings_Interface data={state.data} />
+      )}
+      {state.interface == "Error_Interface" && (
+        <Error_Interface data={state.data} />
+      )}
+      {errors && <div className="error_handler">{errors}</div>}
     </div>
   );
 };

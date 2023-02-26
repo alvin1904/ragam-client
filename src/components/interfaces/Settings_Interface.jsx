@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-export default function Settings() {
+export default function Settings({ data }) {
+  console.log(data);
   const details = {
     name: "Alvin Varghese",
     email: "alvin19official@gmail.com",
@@ -21,7 +22,7 @@ export default function Settings() {
   };
 
   const handlePassword = () => {
-    console.log(changeCredentials)
+    console.log(changeCredentials);
     if (changeCredentials.password1.length < 6) {
       setChangedCredentials({ ...changeCredentials, alert1: true });
     } else if (changeCredentials.password1 != changeCredentials.password2) {

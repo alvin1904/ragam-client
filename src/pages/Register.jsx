@@ -43,7 +43,6 @@ export default function Register() {
 
   return (
     <div className="login">
-      {console.log(details)}
       <section className="login_section register_section">
         <h1>Register</h1>
         <div className="login_form transition_1">

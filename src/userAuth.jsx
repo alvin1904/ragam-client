@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 const AppContext = React.createContext();
 
-import { loginUserApi, registerUserApi } from "./apis";
+import { loginUserApi, registerUserApi, setHead, getDetails } from "./apis";
 
 const AppProvider = ({ children }) => {
   const [user, setUser] = useState({
@@ -16,12 +16,14 @@ const AppProvider = ({ children }) => {
       const response = await loginUserApi(data);
       console.log(response);
       if (response && response.data && response.data.token && data) {
-        setUser({
+        let temp = {
           ...user,
           email: data.email,
           verified: true,
           token: response.data.token,
-        });
+        };
+        setUser(temp);
+        addtoLocalStorage(temp);
       }
       return response;
     } catch (err) {
@@ -39,11 +41,24 @@ const AppProvider = ({ children }) => {
       return err;
     }
   };
-  const getUser = () => {
-    return user;
+  const addtoLocalStorage = async (data) => {
+    try {
+      data.token && setHead(data.token);
+      const response = await getDetails();
+      let temp = JSON.stringify(response.data);
+      console.log(temp);
+      localStorage.setItem("details", temp);
+    } catch (err) {
+      alert("token expire or net down")
+      console.log(err);
+    }
   };
+  const getUser = () => user;
+
   return (
-    <AppContext.Provider value={{ getUser, loginUser, registerUser }}>
+    <AppContext.Provider
+      value={{ getUser, addtoLocalStorage, loginUser, registerUser }}
+    >
       {children}
     </AppContext.Provider>
   );

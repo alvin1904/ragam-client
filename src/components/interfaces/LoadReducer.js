@@ -1,5 +1,5 @@
 export const INITIAL_STATE = {
-  interface: "Main_Interface",
+  interface: "Loading_Interface",
   data: {},
 };
 
@@ -35,6 +35,11 @@ export const LoadReducer = (state, action) => {
         interface: "Error_Interface",
         data: action.payload,
       };
+    case "Sign_Out":
+      return {
+        interface: "Loading_Interface",
+        data: action.payload,
+      };
     default:
       return state;
   }
@@ -45,6 +50,7 @@ export const LOAD_TYPES = {
   Main_Interface: "Main_Interface",
   Profile_Interface: "Profile_Interface",
   Settings_Interface: "Settings_Interface",
-  Search_Interface:"Search_Interface",
+  Search_Interface: "Search_Interface",
   Error_Interface: "Error_Interface",
+  Sign_Out:"Sign_Out"
 };

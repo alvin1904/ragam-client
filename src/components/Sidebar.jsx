@@ -1,5 +1,12 @@
 import "./Nav.css";
-import { MdSettings, MdAccountCircle, MdLibraryMusic, MdOutlineSearch } from "react-icons/md";
+import {
+  MdSettings,
+  MdAccountCircle,
+  MdLibraryMusic,
+  MdOutlineSearch,
+  MdExitToApp
+} from "react-icons/md";
+import { useEffect, useState } from "react";
 
 const Sidebar = ({ interfaces, changeInterface }) => {
   const changePage = (page) => changeInterface(page);
@@ -25,7 +32,19 @@ const Sidebar = ({ interfaces, changeInterface }) => {
       target: "Settings_Interface",
       button: <MdSettings size={28} />,
     },
+    {
+      target: "Sign_Out",
+      button: <MdExitToApp size={28} />,
+    },
   ];
+
+  const [firsttime, setFirstTime] = useState(true);
+  useEffect(() => {
+    if (firsttime) {
+      setFirstTime(false);
+      changePage("Main_Interface");
+    }
+  }, [firsttime]);
 
   return (
     <div className="sidebar">
@@ -47,5 +66,4 @@ const Sidebar = ({ interfaces, changeInterface }) => {
     </div>
   );
 };
-
 export default Sidebar;
