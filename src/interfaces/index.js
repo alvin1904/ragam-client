@@ -1,9 +1,9 @@
-import Loading_Interface from "./Loading_Interface";
-import Main_Interface from "./Main_Interface";
-import Profile_Interface from "./Profile_Interface";
-import Settings_Interface from "./Settings_Interface";
-import Search_Interface from "./Search_Interface";
-import Error_Interface from "./Error_Interface";
+import Loading_Interface from "./Helpers/Loading_Interface";
+import Main_Interface from "./Main/Main_Interface";
+import Profile_Interface from "./ProfileSettings/Profile_Interface";
+import Settings_Interface from "./ProfileSettings/Settings_Interface";
+import Search_Interface from "./Search/Search_Interface";
+import Error_Interface from "./Helpers/Error_Interface";
 
 export {
   Loading_Interface,

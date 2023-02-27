@@ -1,13 +1,13 @@
 import "./AppInterface.css";
-import Navbar from "../components/Navbar";
-import Sidebar from "../components/Sidebar";
+import Navbar from "../../layouts/Navbar";
+import Sidebar from "../../layouts/Sidebar";
 import { useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
   LoadReducer,
   INITIAL_STATE,
-} from "../components/interfaces/LoadReducer";
+} from "../../hooks/LoadReducer";
 import {
   Loading_Interface,
   Main_Interface,
@@ -15,14 +15,14 @@ import {
   Profile_Interface,
   Settings_Interface,
   Error_Interface,
-} from "../components/interfaces/index";
+} from "../../interfaces/index";
 import {
   APICallsforMain,
   APICallsforProfile,
   APICallsforSearch,
   APICallsforSettings,
   APICallsforSignOut,
-} from "../pages/APICallsforInterfaces";
+} from "./APICallsforInterfaces";
 // import { useUserAuthContext } from "../userAuth";
 
 const AppInterface = () => {

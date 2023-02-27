@@ -5,9 +5,9 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
-import Home from "./Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import Home from "./pages/Home";
+import Login from "./pages/Auth/Login";
+import Register from "./pages/Auth/Register";
 import TokenCheck from "./helper/TokenCheck";
 
 function App() {

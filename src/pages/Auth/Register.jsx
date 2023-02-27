@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import { useUserAuthContext } from "../userAuth";
+import { useUserAuthContext } from "../../context/userAuth";
 
 export default function Register() {
   const [details, setDetails] = useState({
@@ -24,7 +24,7 @@ export default function Register() {
       return setErr("The passwords do not match");
     }
     setErr("");
-    let temp = {...details};
+    let temp = { ...details };
     delete temp.password1;
     const res = await registerUser(temp);
     if (res && res.data && res.status == 201) {

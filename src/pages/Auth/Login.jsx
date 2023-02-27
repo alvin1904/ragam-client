@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import { useUserAuthContext } from "../userAuth";
-import { getDetails, setHead } from "../apis";
+import { useUserAuthContext } from "../../context/userAuth";
+import { getDetails, setHead } from "../../apis";
 
 export default function Login() {
   const navigate = useNavigate();
