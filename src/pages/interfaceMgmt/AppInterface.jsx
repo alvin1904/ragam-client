@@ -24,7 +24,6 @@ import {
 const AppInterface = () => {
   const navigate = useNavigate();
   const [state, dispatch] = useReducer(LoadReducer, INITIAL_STATE);
-  const [errors, setErrors] = useState("a big error");
 
   const changeInterface = (target) => {
     dispatch({ type: "Loading_Interface" });
@@ -78,7 +77,6 @@ const AppInterface = () => {
       {state.interface == "Error_Interface" && (
         <Error_Interface data={state.data} />
       )}
-      {errors && <div className="error_handler">{errors}</div>}
     </div>
   );
 };

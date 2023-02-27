@@ -1,5 +1,5 @@
 import { logoutUserApi, setHead } from "../../apis/index";
-import { getFromLocalStorage } from "../../helper/TokenCheck";
+import { getFromLocalStorage } from "../../helper/StorageOperations";
 
 const APICallsforMain = () => {
   return { msg: "main" };

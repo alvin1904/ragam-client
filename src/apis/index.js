@@ -16,8 +16,10 @@ export const setHead = (token) => {
 
 export const loginUserApi = (data) => api.post("/user/auth/login", data);
 export const registerUserApi = (data) => api.post("/user/auth/register", data);
+export const logoutUserApi = () => api.get("/user/auth/logout");
 export const getDetails = () => api.get("/user");
-export const logoutUserApi=()=>api.get("/user/auth/logout");
+export const updateUserName = (data) => api.patch("/user/auth/edit", data);
+export const updatePassword = (data) => api.patch("/user/auth/edit/password", data);
 
 export const addTodo = (data) => api.post("/todo/new", data);
 export const deleteTodo = (id) => api.delete(`/todo/delete/${id}`);

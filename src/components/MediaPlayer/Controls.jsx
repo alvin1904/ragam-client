@@ -16,17 +16,19 @@ const Controls = ({
   looping,
   setShuffle,
   setLooping,
-}) =>{
+}) => {
+  const controlsize = 37;
+
   return (
     <div className="audio_tools">
       <button
         className={`audio_btn shuffle ${shuffle ? "shuffling" : ""}`}
         onClick={() => setShuffle(!shuffle)}
       >
-        <IoShuffle size={28} />
+        <IoShuffle size={controlsize - 7} />
       </button>
       <button className="audio_btn prev" onClick={handlePrev}>
-        <IoPlaySkipBackCircleSharp size={35} />
+        <IoPlaySkipBackCircleSharp size={controlsize} />
       </button>
 
       <button
@@ -36,20 +38,24 @@ const Controls = ({
           setPlaying(!playing);
         }}
       >
-        {playing ? <IoPauseCircle size={35} /> : <IoPlayCircle size={35} />}
+        {playing ? (
+          <IoPauseCircle size={controlsize} />
+        ) : (
+          <IoPlayCircle size={controlsize} />
+        )}
       </button>
 
       <button className="audio_btn next">
-        <IoPlaySkipForwardCircleSharp size={35} />
+        <IoPlaySkipForwardCircleSharp size={controlsize} />
       </button>
       <button
         className={`audio_btn loop ${looping ? "looping" : ""}`}
         onClick={() => setLooping(!looping)}
       >
-        <IoRepeat size={28} />
+        <IoRepeat size={controlsize - 7} />
       </button>
     </div>
   );
-}
+};
 
-export default Controls
+export default Controls;
