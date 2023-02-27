@@ -5,8 +5,7 @@ import songlink from "../../assets/koode.mp3";
 
 const Controller = () => {
   const [playing, setPlaying] = useState(false);
-  const [time, setTime] = useState(0);
-  const [duration, setDuration] = useState(0);
+  const [time, setTime] = useState({ playing: 0, duration: 0 });
   const [looping, setLooping] = useState(false);
   const [shuffle, setShuffle] = useState(false);
   const [song, setSong] = useState(
@@ -27,18 +26,24 @@ const Controller = () => {
   }, [playing]);
 
   const handleTimeUpdate = () => {
-    setTime(audioRef.current.currentTime);
-    setDuration(audioRef.current.duration);
+    setTime({
+      playing: audioRef.current.currentTime,
+      duration: audioRef.current.duration,
+    });
   };
   const handleSeek = (e) => {
-    setTime(e.target.value);
+    setTime({
+      playing: e.target.value,
+    });
     audioRef.current.currentTime = e.target.value;
     audioRef.current.play();
     setPlaying(true);
   };
 
   const handlePrev = () => {
-    setTime(0);
+    setTime({
+      playing: 0,
+    });
     audioRef.current.currentTime = 0;
     audioRef.current.play();
     setPlaying(true);
@@ -53,18 +58,15 @@ const Controller = () => {
   return (
     <div className="audio_controller">
       <audio autoPlay ref={audioRef} onTimeUpdate={handleTimeUpdate}>
-        <source
-          src={song}
-          type="audio/mpeg"
-        />
+        <source src={song} type="audio/mpeg" />
       </audio>
 
       <input
         type="range"
         min={0}
-        max={duration}
+        max={time.duration}
         className="audio_slider"
-        value={time}
+        value={time.playing}
         onChange={handleSeek}
       />
       <div className="audio_controls">
@@ -94,7 +96,7 @@ const Controller = () => {
             setSong(false);
           }}
         >
-          {formatTime(time)} / {formatTime(duration)}
+          {formatTime(time.playing)} / {formatTime(time.duration)}
         </div>
       </div>
     </div>
