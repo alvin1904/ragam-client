@@ -44,13 +44,3 @@ export const LoadReducer = (state, action) => {
       return state;
   }
 };
-
-export const LOAD_TYPES = {
-  Loading_Interface: "Loading_Interface",
-  Main_Interface: "Main_Interface",
-  Profile_Interface: "Profile_Interface",
-  Settings_Interface: "Settings_Interface",
-  Search_Interface: "Search_Interface",
-  Error_Interface: "Error_Interface",
-  Sign_Out:"Sign_Out"
-};

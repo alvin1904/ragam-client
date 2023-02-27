@@ -33,7 +33,8 @@ export default function Login() {
   const handleLogin = async () => {
     if (details.email == 0 || details.password == "")
       setErr("Enter credentials and try again");
-    else if (details.password.length < 6) setErr("Enter a valid password");
+    else if (details.password.length < 6)
+      setErr("Enter a valid password and try again");
     else {
       setErr("");
       const res = await loginUser(details);
@@ -46,7 +47,7 @@ export default function Login() {
         res.response.data.error
       )
         setErr(res.response.data.error);
-      else setErr("Unknown error");
+      else setErr("The server is down");
     }
   };
   return (

@@ -28,8 +28,7 @@ const Controller = () => {
 
   const handleTimeUpdate = () => {
     setTime(audioRef.current.currentTime);
-    // if (audioRef.current.duration != NaN)
-      setDuration(audioRef.current.duration);
+    setDuration(audioRef.current.duration);
   };
   const handleSeek = (e) => {
     setTime(e.target.value);
@@ -46,7 +45,6 @@ const Controller = () => {
   };
 
   const formatTime = (tym) => {
-    // if (tym == NaN) return "00:00";
     const min = Math.floor(tym / 60);
     const sec = Math.floor(tym % 60);
     return `${min}:${sec < 10 ? "0" : ""}${sec}`;
@@ -56,7 +54,6 @@ const Controller = () => {
     <div className="audio_controller">
       <audio autoPlay ref={audioRef} onTimeUpdate={handleTimeUpdate}>
         <source
-          // src="https://doc-00-98-docs.googleusercontent.com/docs/securesc/dlfeeh7md5q6826l8mhnjtkgnf52s757/abo11b6qp37gekn9b2fbm3skbgcuo76s/1677388950000/11852845253625371789/17166374309800377361/1eFtUVyh-X1lVI6MtQr03u6vuFueDMg9t?e=download&ax=AB85Z1DuWeKzp4NziuAhKj09IFqqGMmSQiZS8ylElXj2jfP8vqObqsVXiSOfB8upl2bv77dO-28lo_s0vNdvObSeGcydL9rzE998EKT71lTjIruZ4HWgo0-Thu0fZmplKUSM6UR51Xj89-_T3olRVu-4uK72Vn-YVJBqN43AJ35s5XKZ18pdNrZgO16son2RD7ZFidh-iVsXbn-kiuXK8k_ndjauOrW7-ZzRonlyFso-S7X3i7mAMl1dFJmAhb8oJo2xkf6oKwzBtkcJQUtLPvL4YefnOFqH7i8j8ZHHrJOQrBufS4JQbYNT9GF3UdMhtVNbXRh-ZSzigt-pUUb0jvwQ_XxECI_HDqLdb99sRl8a4OTvWWuEbv3CNZQFSV1PD3jBgeBj8gq1M1vMvEwJxhvuazHrnnKToEZNJbHLedlU9l8cDCt-HXqyzb5Fknu3B-5uSy-hypKdxQJeZnqV76ovZAZ5WUDMO4hjxCk4biWXbXSbd3xmeFVxH-fY6Q9cYPGmwkIJ_qSvT9NNJnMMZyHJ3TIFkgWo53sOWCT3fAitcd-IqXPfzxNzCFHjGRRUIswUkiDOVE7glWqJcAd6-JP7cWa-yIuVCT_yIj9pD87t7GCuNsa84mjYpzk3D9FgTeibjsNOuJG_YtHzGkX64EUqTM71gZ0T2f9dgAON0byI1n-B9yVcCKN3sUFkEhx8R6-eQSefaPdTctZPSL2hY9BHZnG4MFhRnRWw7X9YQUBnUAteinAH5gtJBR2W--k_Rl0YCtfnWRIaIL7qL7IfN-S-Pc2oCl20bqRyAFZSDldieCAJ20dW3a_CAautG9aF14Z1xauWr2NFo4CGL7hnXEADhoETeJzqpUM15VJpXOkZyyCiWVrMo32J2UhUP9LfMVJiewhUj7FoljMQKuzT0DqLRoEzABEll4cQEdnsjTBdwMpJ7TURhM7FW0J2T1a_LYNuJtvhBtyu&uuid=49cd623d-d345-48d4-a24b-7ef9c288b542&authuser=0"
           src={song}
           type="audio/mpeg"
         />

@@ -12,10 +12,6 @@ const Sidebar = ({ interfaces, changeInterface }) => {
   const changePage = (page) => changeInterface(page);
 
   const btns = [
-    // {
-    //   target: "Loading_Interface",
-    //   button: <MdLibraryMusic size={28} />,
-    // },
     {
       target: "Main_Interface",
       button: <MdLibraryMusic size={28} />,

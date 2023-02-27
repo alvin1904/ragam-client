@@ -1,6 +1,6 @@
+import "./Login.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Login.css";
 import { useUserAuthContext } from "../../context/userAuth";
 
 export default function Register() {
@@ -36,7 +36,7 @@ export default function Register() {
       res.response.data.error
     )
       return setErr(res.response.data.error);
-    else return setErr("Unknown error");
+    else return setErr("The server is down");
 
     if (flag) navigate("/login");
   };

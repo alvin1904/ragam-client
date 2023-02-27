@@ -4,10 +4,7 @@ import Sidebar from "../../layouts/Sidebar";
 import { useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import {
-  LoadReducer,
-  INITIAL_STATE,
-} from "../../hooks/LoadReducer";
+import { LoadReducer, INITIAL_STATE } from "../../hooks/LoadReducer";
 import {
   Loading_Interface,
   Main_Interface,
@@ -23,13 +20,12 @@ import {
   APICallsforSettings,
   APICallsforSignOut,
 } from "./APICallsforInterfaces";
-// import { useUserAuthContext } from "../userAuth";
 
 const AppInterface = () => {
-  // const { addtoLocalStorage } = useUserAuthContext();
   const navigate = useNavigate();
   const [state, dispatch] = useReducer(LoadReducer, INITIAL_STATE);
   const [errors, setErrors] = useState("a big error");
+
   const changeInterface = (target) => {
     dispatch({ type: "Loading_Interface" });
     let data = {};

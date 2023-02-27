@@ -8,7 +8,7 @@ import {
   IoRepeat,
 } from "react-icons/io5";
 
-export default function Controls({
+const Controls = ({
   playing,
   setPlaying,
   handlePrev,
@@ -16,7 +16,7 @@ export default function Controls({
   looping,
   setShuffle,
   setLooping,
-}) {
+}) =>{
   return (
     <div className="audio_tools">
       <button
@@ -51,3 +51,5 @@ export default function Controls({
     </div>
   );
 }
+
+export default Controls
