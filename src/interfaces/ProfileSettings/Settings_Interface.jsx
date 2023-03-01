@@ -28,8 +28,8 @@ export default function Settings({ data }) {
       setLocalStorage(temp);
       setChangedCredentials({ ...changeCredentials, name: "" });
     } catch (err) {
-      console.log("error");
       console.log(err);
+      if (err.response) return err.response.data;
     }
   };
 
@@ -63,9 +63,8 @@ export default function Settings({ data }) {
       if (res.status == 200) return { message: res.data.message };
       //success handle here
     } catch (err) {
-      //error handle here
-      console.log(err.response.data.error);
       console.log(err);
+      if (err.response) return err.response.data;
     }
   };
 

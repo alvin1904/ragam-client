@@ -26,8 +26,8 @@ const AppInterface = () => {
   const [state, dispatch] = useReducer(LoadReducer, INITIAL_STATE);
 
   const changeInterface = (target) => {
-    dispatch({ type: "Loading_Interface" });
     let data = {};
+    dispatch({ type: "Loading_Interface", payload: data });
     try {
       switch (target) {
         case "Main_Interface":
@@ -50,7 +50,8 @@ const AppInterface = () => {
       }
     } catch (err) {
       data = { ...err };
-      dispatch({ type: "Error_Interface" });
+      dispatch({ type: "Error_Interface", payload: data });
+      return;
     }
     dispatch({ type: target, payload: data });
   };

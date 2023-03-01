@@ -21,6 +21,3 @@ export const getDetails = () => api.get("/user");
 export const updateUserName = (data) => api.patch("/user/auth/edit", data);
 export const updatePassword = (data) => api.patch("/user/auth/edit/password", data);
 
-export const addTodo = (data) => api.post("/todo/new", data);
-export const deleteTodo = (id) => api.delete(`/todo/delete/${id}`);
-export const completeTodo = (id) => api.put(`/todo/complete/${id}`);

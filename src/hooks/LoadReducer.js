@@ -8,7 +8,7 @@ export const LoadReducer = (state, action) => {
     case "Loading_Interface":
       return {
         interface: "Loading_Interface",
-        data: {},
+        data: action.payload,
       };
     case "Main_Interface":
       return {

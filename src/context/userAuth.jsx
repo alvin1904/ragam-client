@@ -1,15 +1,18 @@
 import React, { useContext } from "react";
-import { loginUserApi, registerUserApi, setHead, getDetails } from "../apis";
+import {
+  loginUserApi,
+  registerUserApi,
+  setHead,
+  getDetails,
+} from "../../../ragam/src/apis";
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
   const registerUser = async (data) => {
     try {
       const response = await registerUserApi(data);
-      console.log(response);
       return response;
     } catch (err) {
-      console.log(err);
       return err;
     }
   };
@@ -17,12 +20,10 @@ const AppProvider = ({ children }) => {
   const loginUser = async (data) => {
     try {
       const response = await loginUserApi(data);
-      console.log(response);
       if (data && response && response.data && response.data.token)
         await addtoLocalStorage(response.data.token);
       return response;
     } catch (err) {
-      console.log(err);
       return err;
     }
   };

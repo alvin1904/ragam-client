@@ -25,6 +25,8 @@ export default function Login() {
         })
         .catch((err) => {
           console.log(err);
+          if (err.message) return err;
+          if (err.response) return err.response.data;
         });
     }
     //CHECKING IF THERE IS A TOKEN IN STORAGE
@@ -38,16 +40,10 @@ export default function Login() {
     else {
       setErr("");
       const res = await loginUser(details);
-      if (res && res.data && res.status == 200) {
+      // console.log(res);
+      if (res.status && (res.status == 200 || res.status == 201))
         navigate("/home");
-      } else if (
-        res &&
-        res.response &&
-        res.response.data &&
-        res.response.data.error
-      )
-        setErr(res.response.data.error);
-      else setErr("The server is down");
+      else setErr((res.response && res.response.data.error) || res.message);
     }
   };
   return (

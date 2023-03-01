@@ -15,7 +15,6 @@ export default function Register() {
   const navigate = useNavigate();
 
   const handleRegister = async () => {
-    let flag = false;
     if (details.password == "" || details.email == "" || details.name == "")
       return setErr("Enter credentials and try again");
     else if (details.password.length < 6)
@@ -27,18 +26,9 @@ export default function Register() {
     let temp = { ...details };
     delete temp.password1;
     const res = await registerUser(temp);
-    if (res && res.data && res.status == 201) {
-      flag = true;
-    } else if (
-      res &&
-      res.response &&
-      res.response.data &&
-      res.response.data.error
-    )
-      return setErr(res.response.data.error);
-    else return setErr("The server is down");
-
-    if (flag) navigate("/login");
+    if (res.status && (res.status == 200 || res.status == 201))
+      navigate("/login");
+    else setErr((res.response && res.response.data.error) || res.message);
   };
 
   return (
