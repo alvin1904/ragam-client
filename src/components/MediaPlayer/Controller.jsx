@@ -5,40 +5,62 @@ import songlink from "../../assets/koode.mp3";
 
 const Controller = () => {
   const [playing, setPlaying] = useState(false);
-  const [time, setTime] = useState({ playing: 0, duration: 0 });
+  const [time, setTime] = useState({ current: 0, duration: 0, loading: false });
   const [looping, setLooping] = useState(false);
   const [shuffle, setShuffle] = useState(false);
 
   const link =
     "https://i.scdn.co/image/ab67616d0000b2734b7ec1826a0aff0a0954bcab"; //photolink
 
+  let link1 =
+    "https://storage.googleapis.com/hybrid-heaven-363612.appspot.com/audio/uploads/songFile-1677674140462?GoogleAccessId=firebase-adminsdk-3aeuh%40hybrid-heaven-363612.iam.gserviceaccount.com&Expires=16730303400&Signature=mSAufGJr0hu5rWnrSPH7%2FtIgN0m1GlJSTYR8J1pIpwu9EJHD52hitc%2BkBB8qogjZeQ9LlESfpvtQYIVM83grMPDEKuVKt73ldseJlN%2BK8CH10DYlosX80ETwV7c5zoLUIqA806fma1l3B7Al2X6wD2K4CznajQUyXBuaubSumrYAJBmebF3XcFAWuDvzay5CKolcNfHcVydv1SWmswOtonOhTI%2BPFfntXqS53Edr5xcfd%2BbageeIADsxyyQCalI23URRC3VZtMGCk0DeotIv3PgoUiNi5bKMzP%2BEanTLqhp4GkSrKn4b7QuEKs1UBzb%2FFvHEFqFNx5M064uSBQIgkw%3D%3D";
   let link2 =
-    "https://storage.googleapis.com/hybrid-heaven-363612.appspot.com/audio/uploads/songFile-1677584593836?GoogleAccessId=firebase-adminsdk-3aeuh%40hybrid-heaven-363612.iam.gserviceaccount.com&Expires=16730303400&Signature=TIxn%2BBoaf6NQ%2Fw7VfIrKIMo%2BOTwQFQmuoUg5jg3yW8C6ZCl4KUdisldLNnuZKsdje%2BMBgE6LawpKlkCGPUZAgL8oZ9a0IotBOv5JiWB%2BfJorwmM%2BVqrUVL2ZB2WUEdR%2FRICu8b5TWNi30HvbkFSF38Aymc2PavExnlbFPe%2FTrNlq3k5S2YQxtwKm2vSYXTHwhCZQuMseHCHk1xLHr6aDQTpNmUwKnuz2iQvpXTI4n77mKwQfu%2BVQq4RCwZu1yDYkruQe2OFnIIKWP3GG7XLp2xPBTHqkO9Jb8WtvCd0NDTFYs2VLsVmJb2plBf1pMzKLImDYB9zKFgKnAat0ggSX4w%3D%3D";
+    "https://storage.googleapis.com/hybrid-heaven-363612.appspot.com/audio/uploads/songFile-1677676364834?GoogleAccessId=firebase-adminsdk-3aeuh%40hybrid-heaven-363612.iam.gserviceaccount.com&Expires=16730303400&Signature=qM44HDoRbdpZ8d7GcK8MPGujGtLQbhlE4MIik6EAE%2B7pPDEsoowZzHM11hERXJQg9h%2BD84Y2937tQDSyQRbYLu8cbPpR09tFT6QTE6EmPI9j0ommbm1%2Fb0hFsQPQfyz03mZ09QxUxh2nT%2BuUkk9bVX6%2BZRq9mcPa915KMiB06YET7ZpgEi46oaiSJdp%2FRpgNn2UlcrnMvr3qIKMvqgQgdEg%2BOvQCQpjInpgDQHnRngpOdMkXt6ZaAkwSLWbK8eHLv8ssq0bZkKnc%2BrsssfO9RhUTj%2BUGZXvt484p8%2B39iCIOAUXhDwiSbRqWeULSzWxHOFD%2BtFWuOioEGfV7jW0bMw%3D%3D";
 
-  const [song, setSong] = useState(
-    // "https://drive.google.com/uc?id=1QuB7d8kWkrhPXr985Fk0jauZVpFYXp18&export=download"
-    // "https://drive.google.com/uc?id=1l6pIxppZyuHAIvBap38g41181EGla-2N&export=download"
-    // "https://www.dropbox.com/s/43v06k35rbeon9u/3.mp3?raw=1"
-    // songlink
-    link2
-  );
+  const [songs, setSongs] = useState([
+    // "https://drive.google.com/uc?id=1QuB7d8kWkrhPXr985Fk0jauZVpFYXp18&export=download",
+    // "https://drive.google.com/uc?id=1l6pIxppZyuHAIvBap38g41181EGla-2N&export=download",
+    // "https://www.dropbox.com/s/43v06k35rbeon9u/3.mp3?raw=1",
+    songlink,
+    link1,
+    link2,
+  ]);
+  const [count, setCount] = useState(0);
 
   const audioRef = useRef();
 
   useEffect(() => {
     if (playing) audioRef.current.play();
     else audioRef.current.pause();
-  }, [playing]);
+  }, [playing]); //for play pause button
+
+  useEffect(() => {
+    // Add an event listener to the audio element to detect when it finishes playing
+    const handleEnded = () => {
+      handleNext();
+    };
+
+    // Set the event listener on the audio element
+    audioRef.current.addEventListener("ended", handleEnded);
+
+    // Return a function to remove the event listener when the component unmounts
+    return () => {
+      audioRef.current.removeEventListener("ended", handleEnded);
+    };
+  }, [count]);
 
   const handleTimeUpdate = () => {
     setTime({
-      playing: audioRef.current.currentTime,
+      current: audioRef.current.currentTime,
       duration: audioRef.current.duration,
+      loading: false,
     });
   };
+
   const handleSeek = (e) => {
     setTime({
-      playing: e.target.value,
+      ...time,
+      current: e.target.value,
     });
     audioRef.current.currentTime = e.target.value;
     audioRef.current.play();
@@ -46,24 +68,37 @@ const Controller = () => {
   };
 
   const handlePrev = () => {
-    setTime({
-      playing: 0,
-    });
     audioRef.current.currentTime = 0;
     audioRef.current.play();
     setPlaying(true);
   };
 
+  const handleNext = () => {
+    if (count >= songs.length - 1) {
+      setCount(0);
+      audioRef.current.src = songs[0];
+    } else {
+      audioRef.current.src = songs[count + 1];
+      setCount(count + 1);
+      audioRef.current.play();
+      setPlaying(true);
+    }
+  };
+
   const formatTime = (tym) => {
-    const min = Math.floor(tym / 60);
-    const sec = Math.floor(tym % 60);
-    return `${min}:${sec < 10 ? "0" : ""}${sec}`;
+    if (isNaN(tym)) {
+      setTime({ ...time, duration: 0, loading: true });
+    } else {
+      const min = Math.floor(tym / 60);
+      const sec = Math.floor(tym % 60);
+      return `${min}:${sec < 10 ? "0" : ""}${sec}`;
+    }
   };
 
   return (
     <div className="audio_controller">
       <audio autoPlay ref={audioRef} onTimeUpdate={handleTimeUpdate}>
-        <source src={song} type="audio/mpeg" />
+        <source src={songs[count]} type="audio/mpeg" />
       </audio>
 
       <input
@@ -71,7 +106,7 @@ const Controller = () => {
         min={0}
         max={time.duration}
         className="audio_slider"
-        value={time.playing}
+        value={time.current}
         onChange={handleSeek}
       />
       <div className="audio_controls">
@@ -89,20 +124,20 @@ const Controller = () => {
           playing={playing}
           setPlaying={setPlaying}
           handlePrev={handlePrev}
+          handleNext={handleNext}
           shuffle={shuffle}
           looping={looping}
           setShuffle={setShuffle}
           setLooping={setLooping}
         />
 
-        <div
-          className="audio_right"
-          onClick={() => {
-            setSong(false);
-          }}
-        >
-          {formatTime(time.playing)} / {formatTime(time.duration)}
-        </div>
+        {time.loading ? (
+          <div className="audio_right">loading...</div>
+        ) : (
+          <div className="audio_right">
+            {formatTime(time.current)} /{formatTime(time.duration)}
+          </div>
+        )}
       </div>
     </div>
   );

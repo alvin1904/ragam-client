@@ -12,6 +12,7 @@ const Controls = ({
   playing,
   setPlaying,
   handlePrev,
+  handleNext,
   shuffle,
   looping,
   setShuffle,
@@ -45,7 +46,7 @@ const Controls = ({
         )}
       </button>
 
-      <button className="audio_btn next">
+      <button className="audio_btn next" onClick={handleNext}>
         <IoPlaySkipForwardCircleSharp size={controlsize} />
       </button>
       <button
