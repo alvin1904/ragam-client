@@ -40,7 +40,7 @@ export default function Login() {
     else {
       setErr("");
       const res = await loginUser(details);
-      // console.log(res);
+      console.log(res);
       if (res.status && (res.status == 200 || res.status == 201))
         navigate("/home");
       else setErr((res.response && res.response.data.error) || res.message);

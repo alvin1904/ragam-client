@@ -17,6 +17,7 @@ const Controls = ({
   looping,
   setShuffle,
   setLooping,
+  handleLoop,
 }) => {
   const controlsize = 37;
 
@@ -51,7 +52,10 @@ const Controls = ({
       </button>
       <button
         className={`audio_btn loop ${looping ? "looping" : ""}`}
-        onClick={() => setLooping(!looping)}
+        onClick={() => {
+          setLooping(!looping);
+          handleLoop(!looping)
+        }}
       >
         <IoRepeat size={controlsize - 7} />
       </button>
