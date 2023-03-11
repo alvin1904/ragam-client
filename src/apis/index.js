@@ -19,5 +19,10 @@ export const registerUserApi = (data) => api.post("/user/auth/register", data);
 export const logoutUserApi = () => api.get("/user/auth/logout");
 export const getDetails = () => api.get("/user");
 export const updateUserName = (data) => api.patch("/user/auth/edit", data);
-export const updatePassword = (data) => api.patch("/user/auth/edit/password", data);
+export const updatePassword = (data) =>
+  api.patch("/user/auth/edit/password", data);
 
+export const getSongsApi = (count) => api.get(`/service/songs?count=${count}`);
+export const getSongApi = (id) => api.get(`/song/${id}`);
+export const getAlbumsApi = () => api.get(`/service/albums`);
+export const getAlbumApi = (id) => api.get(`/service/albums/${id}`);

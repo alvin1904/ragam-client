@@ -1,9 +1,9 @@
 import "./Login.css";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUserAuthContext } from "../../context/userAuth";
 import ErrorHandler from "../../components/ErrorHandler/ErrorHandler";
 import { themes, types } from "../../components/ErrorHandler/config";
+import { registerApi } from "../../apis/auth";
 
 export default function Register() {
   //ERROR HANDLER START
@@ -27,7 +27,6 @@ export default function Register() {
     password1: "",
     name: "",
   });
-  const { registerUser } = useUserAuthContext();
   const navigate = useNavigate();
 
   const handleRegister = async () => {
@@ -46,10 +45,9 @@ export default function Register() {
     else if (details.password !== details.password1) {
       return showMessage("The passwords do not match");
     }
-    showMessage("");
     let temp = { ...details };
     delete temp.password1;
-    const res = await registerUser(temp);
+    const res = await registerApi(temp);
     if (res.status && (res.status == 200 || res.status == 201))
       showMessage(
         "Account created. Go to your inbox and verify email.",

@@ -1,8 +1,9 @@
 import { logoutUserApi, setHead } from "../../apis/index";
 import { getFromLocalStorage } from "../../helper/StorageOperations";
+import { useSongsContext } from "../../context/songContext";
 
-const APICallsforMain = () => {
-  return { msg: "main" };
+const APICallsforMain =  () => {
+  return {data: "home"};
 };
 
 const APICallsforSearch = () => {

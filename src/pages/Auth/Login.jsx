@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import { useUserAuthContext } from "../../context/userAuth";
 import { getDetails, setHead } from "../../apis";
 import ErrorHandler from "../../components/ErrorHandler/ErrorHandler";
+import { loginApi } from "../../apis/auth";
 
 export default function Login() {
   //ERROR HANDLER START
@@ -27,7 +27,6 @@ export default function Login() {
     email: "",
     password: "",
   });
-  const { loginUser } = useUserAuthContext();
 
   useEffect(() => {
     let temp = localStorage.getItem("details");
@@ -52,8 +51,7 @@ export default function Login() {
     else if (details.password.length < 6)
       showMessage("Enter a valid password and try again");
     else {
-      const res = await loginUser(details);
-      console.log(res);
+      const res = await loginApi(details)
       if (res.status && (res.status == 200 || res.status == 201))
         navigate("/home");
       else

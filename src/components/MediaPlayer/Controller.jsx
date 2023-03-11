@@ -1,8 +1,10 @@
 import "./Controller.css";
 import Controls from "./Controls";
 import { useState, useRef, useEffect } from "react";
-import songlink from "../../assets/koode.mp3";
-import { link1, link2, link3, link4, link5 } from "../../constants/data";
+import songDefImg from "../../assets/songdefault.webp";
+// import songlink from "../../assets/koode.mp3";
+// import { link1, link2, link3, link4, link5 } from "../../constants/data";
+import { useSongsContext } from "../../context/songContext";
 
 const Controller = () => {
   const [playing, setPlaying] = useState(false);
@@ -10,26 +12,20 @@ const Controller = () => {
   const [looping, setLooping] = useState(false);
   const [shuffle, setShuffle] = useState(false);
 
-  const link =
-    "https://i.scdn.co/image/ab67616d0000b2734b7ec1826a0aff0a0954bcab"; //photolink
+  const [songs, setSongs] = useState([]);
 
-  const [songs, setSongs] = useState([
-    songlink,
-    link1,
-    link2,
-    link3,
-    link4,
-    link5,
-  ]);
-  const [count, setCount] = useState(0);
+  const { currentlyPlaying,count, setCount } = useSongsContext();
+  useEffect(() => {
+    currentlyPlaying && setSongs(currentlyPlaying);
+  }, [currentlyPlaying]);
 
   const audioRef = useRef();
 
   useEffect(() => {
     if (time.loading) console.log("Loading.."); //to prevent conflict error
     else if (playing) audioRef.current.play();
-    else if (!playing) audioRef.current.pause();
-  }, [playing]); //for play pause button
+    else if (!playing && songs.length > 0) audioRef.current.pause();
+  }, [playing, currentlyPlaying]); //for play pause button
 
   useEffect(() => {
     try {
@@ -41,7 +37,6 @@ const Controller = () => {
         // Set the event listener on the audio element
         audioRef.current.addEventListener("ended", handleEnded);
         // Return a function to remove the event listener when the component unmounts
-
         return () => {
           audioRef.current &&
             audioRef.current.removeEventListener("ended", handleEnded);
@@ -83,9 +78,9 @@ const Controller = () => {
   const handleNext = () => {
     if (count >= songs.length - 1) {
       setCount(0);
-      audioRef.current.src = songs[0];
+      audioRef.current.src = songs[0].songFile;
     } else {
-      audioRef.current.src = songs[count + 1];
+      audioRef.current.src = songs[count + 1].songFile;
       setCount(count + 1);
       audioRef.current.play();
       setPlaying(true);
@@ -104,9 +99,11 @@ const Controller = () => {
 
   return (
     <div className="audio_controller">
-      <audio autoPlay ref={audioRef} onTimeUpdate={handleTimeUpdate}>
-        <source src={songs[count]} type="audio/mpeg" />
-      </audio>
+      {songs.length > 0 && songs[count] && (
+        <audio autoPlay ref={audioRef} onTimeUpdate={handleTimeUpdate}>
+          <source src={songs[count].songFile} type="audio/mpeg" />
+        </audio>
+      )}
 
       <input
         type="range"
@@ -118,13 +115,20 @@ const Controller = () => {
       />
       <div className="audio_controls">
         <div className="audio_details">
-          <div className="song_image">
-            <img src={link}></img>
-          </div>
-          <div className="song_title">
-            <h1 className="song_name ">Aararo</h1>
-            <p className="song_artist hover_effect_1">RAGHU DIXIT</p>
-          </div>
+          {songs.length > 0 &&
+            songs[count] &&
+            (<>
+              <div className="song_image">
+                <img src={songs[count].songImage || songDefImg}></img>
+              </div>
+
+              <div className="song_title">
+                <h1 className="song_name ">{songs[count].songName}</h1>
+                <p className="song_artist hover_effect_1">
+                  {songs[count].artistId.name}
+                </p>
+              </div>
+            </>)}
         </div>
 
         <Controls
