@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./Profile.css";
 
 export default function Profile_Interface({ data }) {
-  const [details, setDetails] = useState(data);
 
   return (
     <div className="interface_inside">
@@ -10,24 +9,24 @@ export default function Profile_Interface({ data }) {
         <div className="profile_section">
           <h1 className="profile_welcome_main">
             Hey{" "}
-            {details && details.name && details.name.substring(0, details.name.indexOf(" "))},
+            {data && data.name && data.name.substring(0, data.name.indexOf(" "))},
           </h1>
           <div className="profile_subsection">
-            <h1 className="profile_welcome">Profile Details</h1>
+            <h1 className="profile_welcome">Profile data</h1>
             <span>Name:</span>
-            <span className="p"> {details && details.name}</span>
+            <span className="p"> {data && data.name}</span>
             <br></br>
             <span>Email:</span>
-            <span className="p"> {details && details.email}</span>
+            <span className="p"> {data && data.email}</span>
           </div>
           <div className="profile_subsection">
             <h1 className="profile_welcome">Profile Verification</h1>
             <span>Status:</span>
             <span className="p">
-              {details && details.verified ? "VERIFIED :)" : "NOT VERIFIED"}
+              {data && data.verified ? "VERIFIED :)" : "NOT VERIFIED"}
             </span>
             <br></br>
-            {details && !details.verified && (
+            {data && !data.verified && (
               <span>
                 Go to inbox and click on VERIFY to start enjoying our services.
                 :)

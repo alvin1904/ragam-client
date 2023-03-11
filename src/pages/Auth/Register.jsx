@@ -1,38 +1,67 @@
 import "./Login.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserAuthContext } from "../../context/userAuth";
+import ErrorHandler from "../../components/ErrorHandler/ErrorHandler";
+import { themes, types } from "../../components/ErrorHandler/config";
 
 export default function Register() {
+  //ERROR HANDLER START
+  const [show, setShow] = useState(false);
+  const [messageProps, setMessageProps] = useState({});
+  const showMessage = (text, theme, type) => {
+    setMessageProps({ message: text, themes: theme, types: type });
+    setShow(true);
+  };
+  useEffect(() => {
+    if (show) {
+      const timeout = setTimeout(() => setShow(false), 3000);
+      return () => clearTimeout(timeout);
+    }
+  }, [show]);
+  //ERROR HANDLER END
+
   const [details, setDetails] = useState({
     email: "",
     password: "",
     password1: "",
     name: "",
   });
-  const [err, setErr] = useState("");
   const { registerUser } = useUserAuthContext();
   const navigate = useNavigate();
 
   const handleRegister = async () => {
     if (details.password == "" || details.email == "" || details.name == "")
-      return setErr("Enter credentials and try again");
+      return showMessage(
+        "Enter credentials and try again",
+        themes.light,
+        types.warning
+      );
     else if (details.password.length < 6)
-      return setErr("Password should be min 6 chars long");
+      return showMessage(
+        "Password should be min 6 chars long",
+        themes.light,
+        types.warning
+      );
     else if (details.password !== details.password1) {
-      return setErr("The passwords do not match");
+      return showMessage("The passwords do not match");
     }
-    setErr("");
+    showMessage("");
     let temp = { ...details };
     delete temp.password1;
     const res = await registerUser(temp);
     if (res.status && (res.status == 200 || res.status == 201))
-      navigate("/login");
-    else setErr((res.response && res.response.data.error) || res.message);
+      showMessage(
+        "Account created. Go to your inbox and verify email.",
+        themes.light,
+        types.info
+      );
+    else showMessage((res.response && res.response.data.error) || res.message);
   };
 
   return (
     <div className="login">
+      <ErrorHandler show={show} {...messageProps} />
       <section className="login_section register_section">
         <h1>Register</h1>
         <div className="login_form transition_1">
@@ -68,7 +97,6 @@ export default function Register() {
               setDetails({ ...details, password1: e.target.value });
             }}
           />
-          <div className={`error ${err ? "message" : ""}`}>{err}</div>
         </div>
         <button className="login_btn" onClick={handleRegister}>
           Register

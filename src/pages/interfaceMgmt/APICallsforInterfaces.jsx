@@ -27,12 +27,11 @@ const APICallsforSignOut = async () => {
     if (res.status == 200) {
       localStorage.removeItem("details");
       localStorage.clear();
-      console.log({ msg: res.data.message });
-      return { msg: res.data.message };
+      return res;
     }
   } catch (err) {
     console.log(err);
-    return { err: "signout error" };
+    return err;
   }
 };
 

@@ -3,11 +3,26 @@ import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import { useUserAuthContext } from "../../context/userAuth";
 import { getDetails, setHead } from "../../apis";
+import ErrorHandler from "../../components/ErrorHandler/ErrorHandler";
 
 export default function Login() {
+  //ERROR HANDLER START
+  const [show, setShow] = useState(false);
+  const [messageProps, setMessageProps] = useState({});
+  const showMessage = (text, theme, type) => {
+    setMessageProps({ message: text, themes: theme, types: type });
+    setShow(true);
+  };
+  useEffect(() => {
+    if (show) {
+      const timeout = setTimeout(() => setShow(false), 3000);
+      return () => clearTimeout(timeout);
+    }
+  }, [show]);
+  //ERROR HANDLER END
+
   const navigate = useNavigate();
   const [forgotP, setForgotP] = useState(false);
-  const [err, setErr] = useState("");
   const [details, setDetails] = useState({
     email: "",
     password: "",
@@ -25,8 +40,7 @@ export default function Login() {
         })
         .catch((err) => {
           console.log(err);
-          if (err.message) return err;
-          if (err.response) return err.response.data;
+          return err;
         });
     }
     //CHECKING IF THERE IS A TOKEN IN STORAGE
@@ -34,20 +48,21 @@ export default function Login() {
 
   const handleLogin = async () => {
     if (details.email == 0 || details.password == "")
-      setErr("Enter credentials and try again");
+      showMessage("Enter credentials and try again");
     else if (details.password.length < 6)
-      setErr("Enter a valid password and try again");
+      showMessage("Enter a valid password and try again");
     else {
-      setErr("");
       const res = await loginUser(details);
       console.log(res);
       if (res.status && (res.status == 200 || res.status == 201))
         navigate("/home");
-      else setErr((res.response && res.response.data.error) || res.message);
+      else
+        showMessage((res.response && res.response.data.error) || res.message);
     }
   };
   return (
     <div className="login">
+      <ErrorHandler show={show} {...messageProps} />
       <section className="login_section">
         {!forgotP && (
           <>
@@ -79,7 +94,6 @@ export default function Login() {
                 Forgot password?
               </p>
             </div>
-            <div className={`error ${err ? "message" : ""}`}>{err}</div>
             <button className="login_btn" onClick={handleLogin}>
               Login
             </button>

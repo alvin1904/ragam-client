@@ -1,25 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Profile.css";
 import { updateUserName, updatePassword } from "../../apis/index";
 import { setLocalStorage } from "../../helper/StorageOperations";
+import ErrorHandler from "../../components/ErrorHandler/ErrorHandler";
+import { themes, types } from "../../components/ErrorHandler/config";
 
 export default function Settings({ data }) {
+  //ERROR HANDLER START
+  const [show, setShow] = useState(false);
+  const [messageProps, setMessageProps] = useState({});
+  const showMessage = (text, theme, type) => {
+    setMessageProps({ message: text, themes: theme, types: type });
+    setShow(true);
+  };
+  useEffect(() => {
+    if (show) {
+      const timeout = setTimeout(() => setShow(false), 3000);
+      return () => clearTimeout(timeout);
+    }
+  }, [show]);
+  //ERROR HANDLER END
+
   const [details, setDetails] = useState(data);
   const [changeCredentials, setChangedCredentials] = useState({
     name: "",
     password: "",
     password1: "",
     password2: "",
-    alert1: false,
-    alert2: false,
   });
 
   const handleUsername = async () => {
-    if (!changeCredentials.name) return { message: "no username to chanhge" };
+    if (!changeCredentials.name)
+      return showMessage("No username entered to change!");
 
-    let body = { name: changeCredentials.name };
+    let data = { name: changeCredentials.name };
     try {
-      let res = await updateUserName(body);
+      let res = await updateUserName(data);
       const temp = {
         ...details,
         name: res.data.name,
@@ -27,26 +43,23 @@ export default function Settings({ data }) {
       setDetails(temp);
       setLocalStorage(temp);
       setChangedCredentials({ ...changeCredentials, name: "" });
+      showMessage(
+        "Username changed successfully!",
+        themes.light,
+        types.success
+      );
     } catch (err) {
-      console.log(err);
-      if (err.response) return err.response.data;
+      console.log(res);
+      showMessage((res.response && res.response.data.error) || res.message);
     }
   };
 
   const handlePassword = async () => {
     if (changeCredentials.password1.length < 6) {
-      setChangedCredentials({ ...changeCredentials, alert1: true });
-      return { message: "alert already sent" };
+      return showMessage("The passsword should be atleast 6 characters long");
     } else if (changeCredentials.password1 != changeCredentials.password2) {
-      setChangedCredentials({ ...changeCredentials, alert2: true });
-      return { message: "alert already sent" };
+      return showMessage("The passswords do not match");
     }
-    setChangedCredentials({
-      ...changeCredentials,
-      alert1: false,
-      alert2: false,
-    });
-    //send req
     let body = {
       currentPassword: changeCredentials.password,
       newPassword: changeCredentials.password1,
@@ -60,16 +73,23 @@ export default function Settings({ data }) {
         password1: "",
         password2: "",
       });
-      if (res.status == 200) return { message: res.data.message };
-      //success handle here
-    } catch (err) {
-      console.log(err);
-      if (err.response) return err.response.data;
+      if (res.status == 200)
+        showMessage(
+          "Password changed successfully",
+          themes.light,
+          types.success
+        );
+      else
+        showMessage((res.response && res.response.data.error) || res.message);
+    } catch (res) {
+      console.log(res);
+      showMessage((res.response && res.response.data.error) || res.message);
     }
   };
 
   return (
     <div className="interface_inside">
+      <ErrorHandler show={show} {...messageProps} />
       <div className="settings_intf">
         <div className="profile_section">
           <h1 className="profile_welcome_main">
@@ -136,11 +156,6 @@ export default function Settings({ data }) {
               ></input>
             </span>
             <br></br>
-            <span
-              className={`${changeCredentials.alert1 ? "alerted" : ""} msg`}
-            >
-              The password must contain min 6 characters
-            </span>
             <br></br>
             <span>Enter the password again:</span>
             <span className="p">
@@ -159,13 +174,6 @@ export default function Settings({ data }) {
             <button className="profile_submit" onClick={handlePassword}>
               Click to change
             </button>
-            <br></br>
-            <br></br>
-            <span
-              className={`${changeCredentials.alert2 ? "alerted" : ""} msg`}
-            >
-              The passwords doesn't match.
-            </span>
           </div>
         </div>
       </div>
