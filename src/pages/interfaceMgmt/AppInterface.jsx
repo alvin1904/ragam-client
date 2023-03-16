@@ -1,7 +1,7 @@
 import "./AppInterface.css";
 import Navbar from "../../layouts/Navbar";
 import Sidebar from "../../layouts/Sidebar";
-import { useReducer, useState } from "react";
+import { useReducer } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { LoadReducer, INITIAL_STATE } from "../../hooks/LoadReducer";

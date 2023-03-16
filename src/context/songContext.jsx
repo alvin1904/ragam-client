@@ -20,7 +20,7 @@ const SongProvider = ({ children }) => {
   // FETCH SONGS
   const fetchData = useCallback(async () => {
     setCurrentSongIndex(0);
-    const res = await getSongs(3);
+    const res = await getSongs(5);
     if (res.status === 200) {
       setSongs(res.data);
       setFetch(false);
@@ -54,14 +54,19 @@ const SongProvider = ({ children }) => {
     setIsPlaying(true);
   };
 
-  const handleNext = () => {
+  const handleNext = (index = currentSongIndex + 1) => {
+    console.log(index)
+    console.log(currentSongIndex+1)
     if (!audioRef.current.paused) audioRef.current.pause();
-    if (currentSongIndex === songs.length - 1) {
+    if (
+      currentSongIndex === songs.length - 1 &&
+      index !== currentSongIndex + 1
+    ) {
       setSongs([]);
       setFetch(true);
     } else {
-      audioRef.current.src = songs[currentSongIndex + 1].songFile;
-      setCurrentSongIndex(currentSongIndex + 1);
+      audioRef.current.src = songs[index].songFile;
+      setCurrentSongIndex(index);
       audioRef.current.play();
       setIsPlaying(true);
     }

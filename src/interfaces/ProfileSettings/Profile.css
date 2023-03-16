@@ -1,3 +1,7 @@
+.interface_inside>div{
+  padding: 1rem;
+}
+
 .profile_intf {
   display: grid;
   grid-template-columns: 1fr 1fr;

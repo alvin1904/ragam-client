@@ -1,0 +1,204 @@
+.main_section_container {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 0.8fr 1fr;
+  gap: 1rem;
+}
+
+.main_section {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 2rem !important;
+}
+
+*::-webkit-scrollbar {
+  width: 2px;
+}
+*::-webkit-scrollbar-thumb {
+  width: 2px;
+  background-color: white;
+  border-radius: 2px;
+}
+*::-webkit-scrollbar-track {
+  width: 2px;
+}
+
+.main_section_heading {
+  font-size: 1.35rem;
+  font-weight: 200;
+  margin-bottom: 1rem;
+}
+.main_songs_list {
+  display: grid;
+  grid-auto-flow: row;
+  gap: 1rem;
+  padding-left: 1rem;
+  padding-right: 3rem;
+}
+.song_card {
+  padding: 10px 25px;
+  border-radius: 5px;
+  height: auto;
+  width: 100%;
+  background-color: var(--color-ui-500);
+  background: linear-gradient(
+    to right,
+    var(--color-ui-400),
+    var(--color-ui-800)
+  );
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr auto;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  transition: all 250ms ease-in-out;
+}
+.song_card:hover {
+  background: linear-gradient(
+    225deg,
+    var(--color-ui-800) 0%,
+    var(--color-ui-400) 40%,
+    var(--color-ui-shade) 100%
+  );
+}
+.currently_playing:hover,
+.song_card:hover {
+  padding-left: 35px;
+}
+.currently_playing,
+.currently_playing:hover {
+  background: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
+}
+.song_card > div > h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+.song_card > div > p {
+  font-size: 0.85rem;
+  font-weight: 300;
+  line-height: 1rem;
+  padding-left: 3px;
+}
+
+@media (max-width: 480px) {
+  .main_section {
+    padding-right: 0rem !important;
+  }
+  .main_section_container {
+    all: unset;
+    color: white;
+    padding: 1rem;
+    padding-left: 2.5rem;
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-rows: auto auto;
+  }
+  .main_songs_list {
+    padding: 0;
+    height: 70px;
+    height: auto;
+    width: 100%;
+  }
+  .song_card {
+    padding: 10px;
+  }
+}
+
+.gradient_1 {
+  background-color: #a9c9ff;
+  background: linear-gradient(180deg, #a9c9ff 0%, #ffbbec 100%);
+}
+.gradient_2 {
+  background-color: #0093e9;
+  background: linear-gradient(160deg, #0093e9 0%, #80d0c7 100%);
+}
+.gradient_3 {
+  background-color: #fbab7e;
+  background: linear-gradient(62deg, #fbab7e 0%, #f7ce68 100%);
+}
+.gradient_4 {
+  background-color: #08aeea;
+  background: linear-gradient(0deg, #08aeea 0%, #2af598 100%);
+}
+.gradient_5 {
+  background-color: #fbda61;
+  background: linear-gradient(45deg, #fbda61 0%, #ff5acd 100%);
+}
+.gradient_6 {
+  background-color: #74ebd5;
+  background: linear-gradient(90deg, #74ebd5 0%, #9face6 100%);
+}
+.gradient_7 {
+  background-color: #fad961;
+  background: linear-gradient(90deg, #fad961 0%, #f76b1c 100%);
+}
+
+.main_albums_list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(calc(100% / 3 - 20px), 1fr));
+  grid-auto-rows: minmax(20px, auto);
+  grid-gap: 20px 20px;
+}
+.album_card {
+  height: 180px;
+  width: 100%;
+  border-radius: 6px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 250ms ease-in-out;
+}
+.album_card:hover {
+  padding-top: 20px;
+}
+.album_card:hover p {
+  padding-top: 18px;
+}
+.album_card h1 {
+  font-size: 2.05rem;
+  font-weight: 700;
+  line-height: 35px;
+  word-wrap: break-word;
+}
+.album_card p {
+  transition: all 250ms ease-in-out;
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin-top: 20px;
+}
+@media (max-width: 480px) {
+  .main_albums_list {
+    all: unset;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(calc(100% / 2 - 20px), 1fr));
+    grid-auto-rows: minmax(20px, auto);
+    grid-gap: 20px 20px;
+    overflow-y: scroll;
+  }
+  .main_section,
+  .main_albums_list,
+  .interface_inside,
+  .main_section_container {
+    overflow-y: scroll;
+  }
+  .album_card h1 {
+    font-size: 1.9rem;
+    font-weight: 700;
+    line-height: 35px;
+    word-wrap: break-word;
+  }
+  .album_card p {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 20px;
+    transition: all 250ms ease-in-out;
+  }
+  .album_card:hover p {
+    padding-top: 5px;
+  }
+}
