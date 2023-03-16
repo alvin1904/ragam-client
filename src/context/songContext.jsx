@@ -1,70 +1,76 @@
-import React, { useContext, useEffect, useState } from "react";
-import {
-  getAlbumApi,
-  getAlbumsApi,
-  getSongApi,
-  getSongsApi,
-} from "../apis/index";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { getSongs } from "../apis/songs";
 
 const SongContext = React.createContext();
 
 const SongProvider = ({ children }) => {
-  const [currentlyPlaying, setCurrentlyPlaying] = useState([]);
-  const [count, setCount] = useState(0);
-  const getSongs = async (count = 5) => {
-    try {
-      const response = await getSongsApi(count);
-      console.log(response);
-      if (response.data.length > 0) setCurrentlyPlaying(response.data);
-      return response;
-    } catch (err) {
-      console.log(err);
-      return err;
+  const [fetch, setFetch] = useState(false);
+  const [songs, setSongs] = useState([]);
+  const [currentSongIndex, setCurrentSongIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [err, setErr] = useState("");
+  const audioRef = useRef(null);
+
+  // FETCH SONGS
+  const fetchData = useCallback(async () => {
+    setCurrentSongIndex(0);
+    const res = await getSongs(3);
+    if (res.status === 200) {
+      setSongs(res.data);
+      setFetch(false);
+      audioRef.current && handlePrev();
     }
-  };
-  const getSong = async (id) => {
-    try {
-      const response = await getSongApi(id);
-      console.log(response);
-      return response;
-    } catch (err) {
-      console.log(err);
-      return err;
-    }
-  };
-  const getAlbums = async () => {
-    try {
-      const response = await getAlbumsApi();
-      console.log(response);
-      return response;
-    } catch (err) {
-      console.log(err);
-      return err;
-    }
-  };
-  const getAlbum = async (id) => {
-    try {
-      const response = await getAlbumApi(id);
-      console.log(response);
-      return response;
-    } catch (err) {
-      console.log(err);
-      return err;
-    }
-  };
+  }, []);
   useEffect(() => {
-    if (count == 0 || count == currentlyPlaying.length) getSongs();
-  }, [count]);
+    if (fetch) fetchData();
+  }, [fetch]);
+  useEffect(() => {
+    console.log(songs?.data);
+    if (songs.length == 0 || currentSongIndex >= songs.length - 1)
+      setFetch(true);
+  }, []);
+
+  // PLAY /PAUSE
+  useEffect(() => {
+    if (isPlaying && audioRef.current.paused) audioRef.current.play();
+    else if (!isPlaying && songs.length > 0 && !audioRef.current.paused)
+      audioRef.current.pause();
+  }, [isPlaying]);
+
+  // PREV AND NEXT FUNCTIONS
+  const handlePrev = () => {
+    audioRef.current.currentTime = 0;
+    audioRef.current?.play();
+    setIsPlaying(true);
+  };
+
+  const handleNext = () => {
+    if (!audioRef.current.paused) audioRef.current.pause();
+    if (currentSongIndex === songs.length - 1) setFetch(true);
+    else {
+      audioRef.current.src = songs[currentSongIndex + 1].songFile;
+      setCurrentSongIndex(currentSongIndex + 1);
+      audioRef.current.play();
+      setIsPlaying(true);
+    }
+  };
+
   return (
     <SongContext.Provider
       value={{
-        getSongs,
-        getSong,
-        getAlbums,
-        getAlbum,
-        count,
-        setCount,
-        currentlyPlaying,
+        songs,
+        currentSongIndex,
+        audioRef,
+        isPlaying,
+        setIsPlaying,
+        handlePrev,
+        handleNext,
       }}
     >
       {children}

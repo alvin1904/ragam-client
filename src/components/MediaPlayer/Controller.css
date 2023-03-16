@@ -60,13 +60,13 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  object-fit: cover;
 }
 .song_image img {
   flex-shrink: 0;
   flex-grow: 1;
   min-width: 100%;
   min-height: 100%;
+  object-fit: cover;
 }
 .song_title {
   padding-left: 10px;

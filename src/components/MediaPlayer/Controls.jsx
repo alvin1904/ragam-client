@@ -5,8 +5,10 @@ import {
   IoPlaySkipBackCircleSharp,
   IoPlaySkipForwardCircleSharp,
 } from "react-icons/io5";
+import { useSongsContext } from "../../context/songContext";
 
-const Controls = ({ playing, setPlaying, handlePrev, handleNext }) => {
+const Controls = () => {
+  const { isPlaying, setIsPlaying, handlePrev, handleNext } = useSongsContext();
   const controlsize = 38;
 
   return (
@@ -15,13 +17,13 @@ const Controls = ({ playing, setPlaying, handlePrev, handleNext }) => {
         <IoPlaySkipBackCircleSharp size={controlsize} />
       </button>
       <button
-        className={`audio_btn ${playing ? "play" : "pause"}`}
-        accessKey="Space"
         onClick={() => {
-          setPlaying(!playing);
+          setIsPlaying(!isPlaying);
         }}
+        className={`audio_btn ${isPlaying ? "play" : "pause"}`}
+        accessKey="Space"
       >
-        {playing ? (
+        {isPlaying ? (
           <IoPauseCircle size={controlsize} />
         ) : (
           <IoPlayCircle size={controlsize} />
