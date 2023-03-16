@@ -22,7 +22,7 @@ export const updateUserName = (data) => api.patch("/user/auth/edit", data);
 export const updatePassword = (data) =>
   api.patch("/user/auth/edit/password", data);
 
-export const getSongsApi = (count) => api.get(`/service/songs?count=${count}`);
+export const getSongsApi = (count) => api.get(`/user-services/songs?count=${count}`);
 export const getSongApi = (id) => api.get(`/song/${id}`);
-export const getAlbumsApi = () => api.get(`/service/albums`);
-export const getAlbumApi = (id) => api.get(`/service/albums/${id}`);
+export const getAlbumsApi = () => api.get(`/user-services/albums`);
+export const getAlbumApi = (id) => api.get(`/user-services/albums/${id}`);

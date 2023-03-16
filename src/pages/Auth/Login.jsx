@@ -4,6 +4,7 @@ import "./Login.css";
 import { getDetails, setHead } from "../../apis";
 import ErrorHandler from "../../components/ErrorHandler/ErrorHandler";
 import { loginApi } from "../../apis/auth";
+import { themes, types } from "../../components/ErrorHandler/config";
 
 export default function Login() {
   //ERROR HANDLER START
@@ -38,7 +39,7 @@ export default function Login() {
           if (res.status == 200 && res.data) navigate("/home");
         })
         .catch((err) => {
-          console.log(err);
+          showMessage("Please login to use our services", themes.light, types.warning)
           return err;
         });
     }

@@ -13,7 +13,6 @@ const SongProvider = ({ children }) => {
   const [count, setCount] = useState(0);
   const getSongs = async (count = 5) => {
     try {
-      console.log("hee ha");
       const response = await getSongsApi(count);
       console.log(response);
       if (response.data.length > 0) setCurrentlyPlaying(response.data);
