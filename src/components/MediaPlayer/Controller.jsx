@@ -61,7 +61,7 @@ const Controller = () => {
       <ErrorHandler show={show} {...messageProps} />
       {songs && songs.length > 0 && songs[currentSongIndex] && (
         <>
-          <audio autoPlay ref={audioRef} onTimeUpdate={handleTimeUpdate}>
+          <audio ref={audioRef} onTimeUpdate={handleTimeUpdate}>
             <source src={songs[currentSongIndex].songFile} type="audio/mpeg" />
           </audio>
           <input

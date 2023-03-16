@@ -10,6 +10,7 @@ import { getSongs } from "../apis/songs";
 const SongContext = React.createContext();
 
 const SongProvider = ({ children }) => {
+  const [firstTime, setFirstTime] = useState(true);
   const [fetch, setFetch] = useState(false);
   const [songs, setSongs] = useState([]);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
@@ -19,11 +20,13 @@ const SongProvider = ({ children }) => {
 
   // FETCH SONGS
   const fetchData = useCallback(async () => {
+    setFirstTime(false);
     setCurrentSongIndex(0);
     const res = await getSongs(3);
     if (res.status === 200) {
       setSongs(res.data);
       setFetch(false);
+      audioRef.current.src = res.data[0].songFile;
       audioRef.current && handlePrev();
     }
   }, []);
@@ -36,7 +39,7 @@ const SongProvider = ({ children }) => {
       setFetch(true);
   }, []);
 
-  // PLAY /PAUSE
+  // PLAY / PAUSE
   useEffect(() => {
     if (isPlaying && audioRef.current.paused) audioRef.current.play();
     else if (!isPlaying && songs.length > 0 && !audioRef.current.paused)
