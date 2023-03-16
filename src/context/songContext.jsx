@@ -10,7 +10,6 @@ import { getSongs } from "../apis/songs";
 const SongContext = React.createContext();
 
 const SongProvider = ({ children }) => {
-  const [firstTime, setFirstTime] = useState(true);
   const [fetch, setFetch] = useState(false);
   const [songs, setSongs] = useState([]);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
@@ -20,14 +19,16 @@ const SongProvider = ({ children }) => {
 
   // FETCH SONGS
   const fetchData = useCallback(async () => {
-    setFirstTime(false);
     setCurrentSongIndex(0);
     const res = await getSongs(3);
     if (res.status === 200) {
       setSongs(res.data);
       setFetch(false);
-      audioRef.current.src = res.data[0].songFile;
-      audioRef.current && handlePrev();
+      if (audioRef.current) {
+        audioRef.current.src = res.data[0].songFile;
+        handlePrev(); //to bring back seek to 0
+        setIsPlaying(true); // auto play plays it and the icon needs to change
+      }
     }
   }, []);
   useEffect(() => {
@@ -55,8 +56,10 @@ const SongProvider = ({ children }) => {
 
   const handleNext = () => {
     if (!audioRef.current.paused) audioRef.current.pause();
-    if (currentSongIndex === songs.length - 1) setFetch(true);
-    else {
+    if (currentSongIndex === songs.length - 1) {
+      setSongs([]);
+      setFetch(true);
+    } else {
       audioRef.current.src = songs[currentSongIndex + 1].songFile;
       setCurrentSongIndex(currentSongIndex + 1);
       audioRef.current.play();
