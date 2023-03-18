@@ -58,8 +58,22 @@ const SongProvider = ({ children }) => {
     audioRef.current?.play();
     setIsPlaying(true);
   };
-
-  const handleNext = (index = currentSongIndex + 1) => {
+  const handleNext = () => {
+    if (!audioRef.current.paused) audioRef.current.pause();
+    if (currentSongIndex === songs.length - 1) setFetch(true);
+    else {
+      if (currentSongIndex === songs.length - 1) {
+        setSongs([]);
+        setFetch(true);
+      } else {
+        audioRef.current.src = songs[currentSongIndex + 1].songFile;
+        setCurrentSongIndex(currentSongIndex + 1);
+        audioRef.current.play();
+        setIsPlaying(true);
+      }
+    }
+  };
+  const handleNextCustom = (index) => {
     console.log(index);
     console.log(currentSongIndex + 1);
     if (!audioRef.current.paused) audioRef.current.pause();
@@ -87,6 +101,7 @@ const SongProvider = ({ children }) => {
         setIsPlaying,
         handlePrev,
         handleNext,
+        handleNextCustom,
         err,
       }}
     >

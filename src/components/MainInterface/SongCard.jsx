@@ -3,7 +3,7 @@ import { useSongsContext } from "../../context/songContext";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 const SongCard = ({ song, index }) => {
-  const { handleNext, currentSongIndex } = useSongsContext();
+  const { handleNextCustom, currentSongIndex } = useSongsContext();
   const [liked, setLiked] = useState(false);
   const { artist, songName } = song;
   return (
@@ -14,7 +14,7 @@ const SongCard = ({ song, index }) => {
     >
       <div
         onClick={() => {
-          handleNext(index);
+          handleNextCustom(index);
         }}
       >
         <h1>{songName}</h1>
