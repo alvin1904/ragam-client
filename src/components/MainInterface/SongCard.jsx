@@ -1,23 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSongsContext } from "../../context/songContext";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 const SongCard = ({ song, index }) => {
   const { handleNext, currentSongIndex } = useSongsContext();
+  const [liked, setLiked] = useState(false);
   const { artist, songName } = song;
   return (
     <div
       className={`song_card ${
         currentSongIndex === index ? "currently_playing" : ""
       }`}
-      onClick={() => {
-        handleNext(index);
-      }}
     >
-      <div>
+      <div
+        onClick={() => {
+          handleNext(index);
+        }}
+      >
         <h1>{songName}</h1>
         <p>{artist[0].name}</p>
       </div>
-      <div>{index}</div>
+      <div>
+        {liked ? (
+          <AiFillHeart
+            size={25}
+            onClick={() => {
+              setLiked(false);
+            }}
+          />
+        ) : (
+          <AiOutlineHeart
+            size={25}
+            onClick={() => {
+              setLiked(true);
+            }}
+          />
+        )}
+      </div>
     </div>
   );
 };

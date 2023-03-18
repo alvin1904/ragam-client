@@ -22,8 +22,12 @@ const Controller = () => {
   }, [show]);
   //ERROR HANDLER END
 
-  const { songs, currentSongIndex, audioRef, setIsPlaying, handleNext } =
+  const { songs, currentSongIndex, audioRef, setIsPlaying, handleNext, err } =
     useSongsContext();
+  useEffect(() => {
+    if (err !== "") showMessage(err);
+  }, [err]);
+
   const [time, setTime] = useState({ current: 0, duration: 0, loading: false });
 
   // HANDLE TIME UPDATE

@@ -27,9 +27,14 @@ const SongProvider = ({ children }) => {
       if (audioRef.current) {
         audioRef.current.src = res.data[0].songFile;
         handlePrev(); //to bring back seek to 0
-        setIsPlaying(true); // auto play plays it and the icon needs to change
       }
-    }
+      setIsPlaying(true); // auto play plays it and the icon needs to change
+    } else
+      setErr(
+        (res.response && res.response.data.error) ||
+          res.message ||
+          "Something went wrong!"
+      );
   }, []);
   useEffect(() => {
     if (fetch) fetchData();
@@ -55,8 +60,8 @@ const SongProvider = ({ children }) => {
   };
 
   const handleNext = (index = currentSongIndex + 1) => {
-    console.log(index)
-    console.log(currentSongIndex+1)
+    console.log(index);
+    console.log(currentSongIndex + 1);
     if (!audioRef.current.paused) audioRef.current.pause();
     if (
       currentSongIndex === songs.length - 1 &&
@@ -82,6 +87,7 @@ const SongProvider = ({ children }) => {
         setIsPlaying,
         handlePrev,
         handleNext,
+        err,
       }}
     >
       {children}
