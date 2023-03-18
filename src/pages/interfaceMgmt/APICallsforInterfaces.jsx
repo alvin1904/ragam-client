@@ -11,9 +11,7 @@ const APICallsforSearch = () => {
 };
 
 const APICallsforProfile = () => {
-  let data = getFromLocalStorage();
-  //also users' playlists
-  return data;
+  return { msg: "profile" };
 };
 
 const APICallsforSettings = () => {

@@ -1,48 +1,76 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Profile.css";
+import PlaylistCard from "../../components/ProfileInterface/PlaylistCard";
+import CreatePlaylistCard from "../../components/ProfileInterface/CreatePlaylistCard";
+import ProfileDetails from "../../components/ProfileInterface/ProfileDetails";
+import { deletePlaylist, getAllPlaylists } from "../../apis/playlist";
+import ErrorHandler from "../../components/ErrorHandler/ErrorHandler";
+import { themes, types } from "../../components/ErrorHandler/config";
 
 export default function Profile_Interface({ data }) {
+  //ERROR HANDLER START
+  const [show, setShow] = useState(false);
+  const [messageProps, setMessageProps] = useState({});
+  const showMessage = (text, theme, type) => {
+    setMessageProps({ message: text, themes: theme, types: type });
+    setShow(true);
+  };
+  useEffect(() => {
+    if (show) {
+      const timeout = setTimeout(() => setShow(false), 3000);
+      return () => clearTimeout(timeout);
+    }
+  }, [show]);
+  //ERROR HANDLER END
+  
+  const [playlists, setPlaylists] = useState([]);
+  const [fetch, setFetch] = useState(true);
+
+  const addToPlaylists = (data) => {
+    let temp = [...playlists];
+    temp.push(data);
+    setPlaylists(temp);
+  };
+
+  useEffect(() => {
+    const fetchPlaylists = async () => {
+      let res = await getAllPlaylists();
+      if (res && res.status == 200) setPlaylists(res.data);
+      else
+        showMessage((res.response && res.response.data.error) || res.message);
+      setFetch(false);
+    };
+
+    if (fetch) fetchPlaylists();
+  }, [fetch]);
+
+  const handleDelete = async (id) => {
+    let res = await deletePlaylist(id);
+    if (res && res.status == 200)
+      showMessage("Playlist deleted successfully", themes.light, types.success);
+    else showMessage((res.response && res.response.data.error) || res.message);
+    setFetch(true);
+  };
 
   return (
     <div className="interface_inside">
+      <ErrorHandler show={show} {...messageProps} />
       <div className="profile_intf">
-        <div className="profile_section">
-          <h1 className="profile_welcome_main">
-            Hey{" "}
-            {data && data.name && data.name.substring(0, data.name.indexOf(" "))},
-          </h1>
-          <div className="profile_subsection">
-            <h1 className="profile_welcome">Profile data</h1>
-            <span>Name:</span>
-            <span className="p"> {data && data.name}</span>
-            <br></br>
-            <span>Email:</span>
-            <span className="p"> {data && data.email}</span>
-          </div>
-          <div className="profile_subsection">
-            <h1 className="profile_welcome">Profile Verification</h1>
-            <span>Status:</span>
-            <span className="p">
-              {data && data.verified ? "VERIFIED :)" : "NOT VERIFIED"}
-            </span>
-            <br></br>
-            {data && !data.verified && (
-              <span>
-                Go to inbox and click on VERIFY to start enjoying our services.
-                :)
-              </span>
-            )}
-          </div>
-          <div className="profile_subsection">
-            <h1 className="profile_welcome">Change username / password</h1>
-            <span>
-              Go over to <span className="p">SETTINGS</span> to update username
-              or password
-            </span>
-          </div>
-        </div>
+        <ProfileDetails />
         <div className="profile_section playlist_section">
           <h1 className="profile_welcome">Playlists created by you</h1>
+          <div className="main_songs_list">
+            <CreatePlaylistCard addToPlaylists={addToPlaylists} />
+            {playlists.map((playlist, index) => {
+              return (
+                <PlaylistCard
+                  key={index}
+                  data={playlist}
+                  handleDelete={handleDelete}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

@@ -10,7 +10,6 @@ import {
 
 const History = () => {
   const { songs } = useSongsContext();
-  console.log(songs);
 
   const transRef = useSpringRef();
   const transitions = useTransition(songs, {

@@ -5,6 +5,7 @@ import songDefImg from "../../assets/songdefault.webp";
 import ErrorHandler from "../ErrorHandler/ErrorHandler";
 import { useSongsContext } from "../../context/songContext";
 import { themes, types } from "../ErrorHandler/config";
+import Loading from "../Loader/Loading";
 
 const Controller = () => {
   //ERROR HANDLER START
@@ -63,6 +64,7 @@ const Controller = () => {
   return (
     <div className="audio_controller">
       <ErrorHandler show={show} {...messageProps} />
+      {songs.length == 0 && <Loading />}
       {songs && songs.length > 0 && songs[currentSongIndex] && (
         <>
           <audio autoPlay ref={audioRef} onTimeUpdate={handleTimeUpdate}>

@@ -32,8 +32,11 @@
   display: grid;
   grid-auto-flow: row;
   gap: 1rem;
+  padding-right: 4rem;
+}
+.main_albums_list,
+.main_songs_list {
   padding-left: 1rem;
-  padding-right: 3rem;
 }
 .song_card {
   padding: 10px 25px;
@@ -151,7 +154,7 @@
   padding: 10px;
   overflow: hidden;
   cursor: pointer;
-  transition: all 450ms cubic-bezier(.57,.21,.69,1.25);
+  transition: all 450ms cubic-bezier(0.57, 0.21, 0.69, 1.25);
 }
 .album_card:hover {
   padding-top: 20px;
@@ -166,7 +169,7 @@
   word-wrap: break-word;
 }
 .album_card p {
-  transition: all 450ms cubic-bezier(.57,.21,.69,1.25);
+  transition: all 450ms cubic-bezier(0.57, 0.21, 0.69, 1.25);
   font-size: 1.15rem;
   font-weight: 500;
   margin-top: 20px;
