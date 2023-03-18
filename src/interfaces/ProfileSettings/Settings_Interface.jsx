@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./Profile.css";
 import { updateUserName, updatePassword } from "../../apis/index";
-import { setLocalStorage } from "../../helper/StorageOperations";
+import {
+  getFromLocalStorage,
+  setLocalStorage,
+} from "../../helper/StorageOperations";
 import ErrorHandler from "../../components/ErrorHandler/ErrorHandler";
 import { themes, types } from "../../components/ErrorHandler/config";
 
-export default function Settings({ data }) {
+export default function Settings() {
   //ERROR HANDLER START
   const [show, setShow] = useState(false);
   const [messageProps, setMessageProps] = useState({});
@@ -21,7 +24,12 @@ export default function Settings({ data }) {
   }, [show]);
   //ERROR HANDLER END
 
-  const [details, setDetails] = useState(data);
+  const [details, setDetails] = useState(getFromLocalStorage("details"));
+  useEffect(() => {
+    if (!details || details.length == 0)
+      setData(getFromLocalStorage("details"));
+  }, []);
+
   const [changeCredentials, setChangedCredentials] = useState({
     name: "",
     password: "",

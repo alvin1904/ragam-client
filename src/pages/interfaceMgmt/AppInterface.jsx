@@ -1,10 +1,9 @@
 import "./AppInterface.css";
 import Navbar from "../../layouts/Navbar";
 import Sidebar from "../../layouts/Sidebar";
-import { useReducer } from "react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-import { LoadReducer, INITIAL_STATE } from "../../hooks/LoadReducer";
 import {
   Loading_Interface,
   Main_Interface,
@@ -13,71 +12,39 @@ import {
   Settings_Interface,
   Error_Interface,
 } from "../../interfaces/index";
-import {
-  APICallsforMain,
-  APICallsforProfile,
-  APICallsforSearch,
-  APICallsforSettings,
-  APICallsforSignOut,
-} from "./APICallsforInterfaces";
 
 const AppInterface = () => {
+  const [interfaceSelected, setInterfaceSelected] = useState("");
   const navigate = useNavigate();
-  const [state, dispatch] = useReducer(LoadReducer, INITIAL_STATE);
-
-  const changeInterface = (target) => {
-    let data = {};
-    dispatch({ type: "Loading_Interface", payload: data });
-    try {
-      switch (target) {
-        case "Main_Interface":
-          data = APICallsforMain();
-          break;
-        case "Search_Interface":
-          data = APICallsforSearch();
-          break;
-        case "Profile_Interface":
-          data = APICallsforProfile();
-          break;
-        case "Settings_Interface":
-          data = APICallsforSettings();
-          break;
-        case "Sign_Out":
-          data = APICallsforSignOut();
-          return navigate("/login");
-        default:
-          data = {};
+  const changeInterface = async (target) => {
+    if (target == "Sign_Out") {
+      try {
+        const res = await logoutUserApi();
+        setHead("");
+        if (res.status == 200) {
+          localStorage.removeItem("details");
+          localStorage.clear();
+          navigate("/login");
+        }
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      data = { ...err };
-      dispatch({ type: "Error_Interface", payload: data });
-      return;
-    }
-    dispatch({ type: target, payload: data });
+    } else setInterfaceSelected(target);
   };
 
   return (
     <div className="interface">
       <Navbar />
-      <Sidebar interfaces={state.interface} changeInterface={changeInterface} />
-      {state.interface == "Loading_Interface" && (
-        <Loading_Interface data={state.data} />
-      )}
-      {state.interface == "Main_Interface" && (
-        <Main_Interface data={state.data} />
-      )}
-      {state.interface == "Search_Interface" && (
-        <Search_Interface data={state.data} />
-      )}
-      {state.interface == "Profile_Interface" && (
-        <Profile_Interface data={state.data} />
-      )}
-      {state.interface == "Settings_Interface" && (
-        <Settings_Interface data={state.data} />
-      )}
-      {state.interface == "Error_Interface" && (
-        <Error_Interface data={state.data} />
-      )}
+      <Sidebar
+        interfaces={interfaceSelected}
+        changeInterface={changeInterface}
+      />
+      {interfaceSelected == "Loading_Interface" && <Loading_Interface />}
+      {interfaceSelected == "Main_Interface" && <Main_Interface />}
+      {interfaceSelected == "Search_Interface" && <Search_Interface />}
+      {interfaceSelected == "Profile_Interface" && <Profile_Interface />}
+      {interfaceSelected == "Settings_Interface" && <Settings_Interface />}
+      {interfaceSelected == "Error_Interface" && <Error_Interface />}
     </div>
   );
 };
