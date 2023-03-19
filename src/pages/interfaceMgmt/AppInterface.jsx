@@ -12,12 +12,17 @@ import {
   Settings_Interface,
   Error_Interface,
 } from "../../interfaces/index";
+import { PlayListProvider } from "../../context/PlaylistContext";
+import { logoutUserApi, setHead } from "../../apis";
 
 const AppInterface = () => {
   const [interfaceSelected, setInterfaceSelected] = useState("");
   const navigate = useNavigate();
+
   const changeInterface = async (target) => {
-    if (target == "Sign_Out") {
+    if (target == "Search_Interface") {
+      setInterfaceSelected(target);
+    } else if (target == "Sign_Out") {
       try {
         const res = await logoutUserApi();
         setHead("");
@@ -29,7 +34,9 @@ const AppInterface = () => {
       } catch (err) {
         console.log(err);
       }
-    } else setInterfaceSelected(target);
+    } else {
+      setInterfaceSelected(target);
+    }
   };
 
   return (
@@ -40,9 +47,15 @@ const AppInterface = () => {
         changeInterface={changeInterface}
       />
       {interfaceSelected == "Loading_Interface" && <Loading_Interface />}
-      {interfaceSelected == "Main_Interface" && <Main_Interface />}
-      {interfaceSelected == "Search_Interface" && <Search_Interface />}
-      {interfaceSelected == "Profile_Interface" && <Profile_Interface />}
+      <PlayListProvider>
+        {interfaceSelected == "Main_Interface" && <Main_Interface />}
+        {interfaceSelected == "Search_Interface" && (
+          <Search_Interface changeInterface={changeInterface} />
+        )}
+        {interfaceSelected == "Profile_Interface" && (
+          <Profile_Interface changeInterface={changeInterface} />
+        )}
+      </PlayListProvider>
       {interfaceSelected == "Settings_Interface" && <Settings_Interface />}
       {interfaceSelected == "Error_Interface" && <Error_Interface />}
     </div>

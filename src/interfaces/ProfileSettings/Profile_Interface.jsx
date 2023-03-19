@@ -6,8 +6,9 @@ import ProfileDetails from "../../components/ProfileInterface/ProfileDetails";
 import { deletePlaylist, getAllPlaylists } from "../../apis/playlist";
 import ErrorHandler from "../../components/ErrorHandler/ErrorHandler";
 import { themes, types } from "../../components/ErrorHandler/config";
+import { usePlayListContext } from "../../context/PlaylistContext";
 
-export default function Profile_Interface({ data }) {
+export default function Profile_Interface({ changeInterface }) {
   //ERROR HANDLER START
   const [show, setShow] = useState(false);
   const [messageProps, setMessageProps] = useState({});
@@ -22,9 +23,10 @@ export default function Profile_Interface({ data }) {
     }
   }, [show]);
   //ERROR HANDLER END
-  
+
   const [playlists, setPlaylists] = useState([]);
   const [fetch, setFetch] = useState(true);
+  const { setViewPlaylist } = usePlayListContext();
 
   const addToPlaylists = (data) => {
     let temp = [...playlists];
@@ -41,7 +43,7 @@ export default function Profile_Interface({ data }) {
       setFetch(false);
     };
 
-    if (fetch) fetchPlaylists();
+    if (fetch || playlists.length == 0) fetchPlaylists();
   }, [fetch]);
 
   const handleDelete = async (id) => {
@@ -67,6 +69,10 @@ export default function Profile_Interface({ data }) {
                   key={index}
                   data={playlist}
                   handleDelete={handleDelete}
+                  handleOpen={() => {
+                    setViewPlaylist(playlist._id);
+                    changeInterface("Search_Interface");
+                  }}
                 />
               );
             })}

@@ -1,8 +1,7 @@
 import React from "react";
 import errGIF from '../../assets/err.gif'
 
-export default function Error_Interface({data}) {
-  console.log(data)
+export default function Error_Interface() {
   return (
     <div className="interface_inside">
       <div className="error_intf">

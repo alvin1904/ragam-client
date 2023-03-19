@@ -29,7 +29,8 @@ export default function Register() {
   });
   const navigate = useNavigate();
 
-  const handleRegister = async () => {
+  const handleRegister = async (e) => {
+    e.preventDefault();
     if (details.password == "" || details.email == "" || details.name == "")
       return showMessage(
         "Enter credentials and try again",
@@ -62,7 +63,7 @@ export default function Register() {
       <ErrorHandler show={show} {...messageProps} />
       <section className="login_section register_section">
         <h1>Register</h1>
-        <div className="login_form transition_1">
+        <form className="login_form transition_1" onSubmit={handleRegister}>
           <input
             type="text"
             value={details.name}
@@ -95,10 +96,10 @@ export default function Register() {
               setDetails({ ...details, password1: e.target.value });
             }}
           />
-        </div>
-        <button className="login_btn" onClick={handleRegister}>
-          Register
-        </button>
+          <button className="login_btn" type="submit">
+            Register
+          </button>
+        </form>
         <div className="alternative_signup">
           <p>
             Already a member?{` `}

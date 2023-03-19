@@ -39,20 +39,25 @@ export default function Login() {
           if (res.status == 200 && res.data) navigate("/home");
         })
         .catch((err) => {
-          showMessage("Please login to use our services", themes.light, types.warning)
+          showMessage(
+            "Please login to use our services",
+            themes.light,
+            types.warning
+          );
           return err;
         });
     }
     //CHECKING IF THERE IS A TOKEN IN STORAGE
   }, []);
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
     if (details.email == 0 || details.password == "")
       showMessage("Enter credentials and try again");
     else if (details.password.length < 6)
       showMessage("Enter a valid password and try again");
     else {
-      const res = await loginApi(details)
+      const res = await loginApi(details);
       if (res.status && (res.status == 200 || res.status == 201))
         navigate("/home");
       else
@@ -66,7 +71,7 @@ export default function Login() {
         {!forgotP && (
           <>
             <h1>Login</h1>
-            <div className="login_form">
+            <form className="login_form" onSubmit={handleLogin}>
               <input
                 type="text"
                 value={details.email}
@@ -92,10 +97,10 @@ export default function Login() {
               >
                 Forgot password?
               </p>
-            </div>
-            <button className="login_btn" onClick={handleLogin}>
-              Login
-            </button>
+              <button className="login_btn" type="submit">
+                Login
+              </button>
+            </form>
             <div className="alternative_signup">
               <p>
                 Not a member?{` `}

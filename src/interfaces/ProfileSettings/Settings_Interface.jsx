@@ -37,7 +37,8 @@ export default function Settings() {
     password2: "",
   });
 
-  const handleUsername = async () => {
+  const handleUsername = async (e) => {
+    e.preventDefault()
     if (!changeCredentials.name)
       return showMessage("No username entered to change!");
 
@@ -62,7 +63,8 @@ export default function Settings() {
     }
   };
 
-  const handlePassword = async () => {
+  const handlePassword = async (e) => {
+    e.preventDefault()
     if (changeCredentials.password1.length < 6) {
       return showMessage("The passsword should be atleast 6 characters long");
     } else if (changeCredentials.password1 != changeCredentials.password2) {
@@ -73,7 +75,7 @@ export default function Settings() {
       newPassword: changeCredentials.password1,
     };
     try {
-      let res = await updatePassword(body);
+      const res = await updatePassword(body);
       console.log(res);
       setChangedCredentials({
         ...changeCredentials,
@@ -107,7 +109,7 @@ export default function Settings() {
               details.name.substring(0, details.name.indexOf(" "))}
             ,
           </h1>
-          <div className="profile_subsection">
+          <form className="profile_subsection" onSubmit={handleUsername}>
             <h1 className="profile_welcome">Change Username: </h1>
             <span>Old Username:</span>
             <span className="p"> {details && details.name}</span>
@@ -126,12 +128,12 @@ export default function Settings() {
                 }}
               ></input>
             </span>
-            <button className="profile_submit" onClick={handleUsername}>
+            <button className="profile_submit" type="submit">
               Click to change
             </button>
             <br></br>
-          </div>
-          <div className="profile_subsection">
+          </form>
+          <form className="profile_subsection" onSubmit={handlePassword}>
             <h1 className="profile_welcome">Change Password: </h1>
             <span>Old password:</span>
             <span className="p">
@@ -179,10 +181,10 @@ export default function Settings() {
                 }}
               ></input>
             </span>
-            <button className="profile_submit" onClick={handlePassword}>
+            <button className="profile_submit" type="submit">
               Click to change
             </button>
-          </div>
+          </form>
         </div>
       </div>
     </div>

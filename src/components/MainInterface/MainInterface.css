@@ -32,7 +32,7 @@
   display: grid;
   grid-auto-flow: row;
   gap: 1rem;
-  padding-right: 4rem;
+  padding: 0 1rem;
 }
 .main_albums_list,
 .main_songs_list {

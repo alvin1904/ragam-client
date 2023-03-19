@@ -24,7 +24,8 @@ export default function CreatePlaylistCard({ addToPlaylists }) {
   const [edit, setEdit] = useState(false);
   const inputRef = useRef(null);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     if (inputRef.current.value) {
       let temp = {};
       temp.name = inputRef.current.value;
@@ -32,9 +33,9 @@ export default function CreatePlaylistCard({ addToPlaylists }) {
       if (res.status == 201) addToPlaylists(res.data);
       else
         showMessage((res.response && res.response.data.error) || res.message);
-      } else
+    } else
       showMessage("Enter a name for new playlist", themes.light, types.warning);
-      handleClose();
+    handleClose();
   };
 
   const handleClose = () => {
@@ -56,15 +57,17 @@ export default function CreatePlaylistCard({ addToPlaylists }) {
         </div>
 
         <div className="ip">
-          <div className="ip_container">
+          <form className="ip_container" onSubmit={handleSubmit}>
             <input
               type="text"
               ref={inputRef}
               placeholder="Enter a name for your playlist"
             />
-            <GrCheckmark size={18} onClick={handleSubmit} />
+            <button className="createp_button" type="submit">
+              <GrCheckmark size={18} />
+            </button>
             <GrClose size={18} onClick={handleClose} />
-          </div>
+          </form>
         </div>
       </div>
     </>

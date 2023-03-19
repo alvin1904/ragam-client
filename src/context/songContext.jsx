@@ -40,7 +40,6 @@ const SongProvider = ({ children }) => {
     if (fetch) fetchData();
   }, [fetch]);
   useEffect(() => {
-    console.log(songs?.data);
     if (songs.length == 0 || currentSongIndex >= songs.length - 1)
       setFetch(true);
   }, []);

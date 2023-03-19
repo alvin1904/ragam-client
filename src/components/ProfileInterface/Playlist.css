@@ -86,3 +86,6 @@
 .pcard svg:hover{
   scale: 1.25;
 }
+.createp_button{
+  all: unset
+}
