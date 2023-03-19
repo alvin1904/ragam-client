@@ -1,4 +1,4 @@
-import { createPlaylistsApi, getAllPlaylistsApi, deletePlaylistsApi, getFromPlaylistsApi } from ".";
+import { createPlaylistsApi, getAllPlaylistsApi, deletePlaylistsApi, getFromPlaylistsApi ,updatePlaylistsApi} from ".";
 
 export const createPlaylist = async (data) => {
   try {
@@ -31,6 +31,14 @@ export const getAllPlaylists = async () => {
 export const getPlayListDetails = async (id) => {
   try {
     const response = await getFromPlaylistsApi(id);
+    return response;
+  } catch (err) {
+    return err;
+  }
+};
+export const addToPlaylist = async (id,data) => {
+  try {
+    const response = await updatePlaylistsApi(id,data);
     return response;
   } catch (err) {
     return err;

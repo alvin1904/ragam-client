@@ -1,0 +1,23 @@
+.playlist_adder {
+  right: 135px;
+  height: auto;
+  width: 200px;
+  position: absolute;
+  background-color: var(--color-ui-800);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 5px;
+  transform: translateY(-7px);
+  z-index: 1000;
+}
+.playlist_adder ul li {
+  height: 40px;
+  text-align: center;
+  border-radius: 5px;
+  display: grid;
+  place-content: center;
+  transition: all 100ms ease-in-out;
+}
+.playlist_adder ul li:hover {
+  background-color: var(--color-ui-shade);
+}

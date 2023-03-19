@@ -17,7 +17,9 @@ const PlayListProvider = ({ children }) => {
   }, [viewPlayList]);
 
   return (
-    <PlayListContext.Provider value={{ viewPlayList, setViewPlaylist, data ,setData}}>
+    <PlayListContext.Provider
+      value={{ viewPlayList, setViewPlaylist, data, setData }}
+    >
       {children}
     </PlayListContext.Provider>
   );

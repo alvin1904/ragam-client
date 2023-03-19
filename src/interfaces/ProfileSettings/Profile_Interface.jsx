@@ -26,7 +26,7 @@ export default function Profile_Interface({ changeInterface }) {
 
   const [playlists, setPlaylists] = useState([]);
   const [fetch, setFetch] = useState(true);
-  const { setViewPlaylist } = usePlayListContext();
+  const { setViewPlaylist } = usePlayListContext(); // for going to search_interface
 
   const addToPlaylists = (data) => {
     let temp = [...playlists];
