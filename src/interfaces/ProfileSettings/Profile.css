@@ -60,14 +60,6 @@
   border-radius: 5px;
   padding: 0 8px;
 }
-.msg {
-  color: red;
-  transition: 250mx all ease-in-out;
-  opacity: 0;
-}
-.alerted{
-  opacity: 0.8;
-}
 .profile_submit{
   all: unset;
   cursor: pointer;

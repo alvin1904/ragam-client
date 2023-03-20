@@ -5,9 +5,8 @@ import PlaylistAdder from "../../components/PlaylistAdder/PlaylistAdder";
 
 const SongCard = ({ song, index, playlists }) => {
   const { handleNext, currentSongIndex } = useSongsContext();
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(song.liked || false);
   const [shows, setShows] = useState(false);
-  const { artist, songName } = song;
   return (
     <div
       className={`song_card ${
@@ -19,8 +18,8 @@ const SongCard = ({ song, index, playlists }) => {
           handleNext(index);
         }}
       >
-        <h1>{songName}</h1>
-        <p>{artist[0].name}</p>
+        <h1>{song.songName}</h1>
+        {song.artist && <p>{song.artist[0].name}</p>}
       </div>
       <div className="songcard_like_plus">
         <div
@@ -31,8 +30,12 @@ const SongCard = ({ song, index, playlists }) => {
             setShows(false);
           }}
         >
-          <PlaylistAdder shows={shows} playlists={playlists} song_id={song._id}/>
-          <AiOutlinePlus size={25} />
+          <PlaylistAdder
+            shows={shows}
+            playlists={playlists}
+            song_id={song._id}
+          />
+          {playlists && <AiOutlinePlus size={25} />}
         </div>
         {liked ? (
           <AiFillHeart

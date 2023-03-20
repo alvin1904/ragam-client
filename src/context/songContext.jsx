@@ -81,6 +81,22 @@ const SongProvider = ({ children }) => {
     }
   };
 
+  const playTheList = (songs) => {
+    try {
+      setSongs(songs);
+      setFetch(false);
+      if (audioRef.current) {
+        audioRef.current.src = songs[0].songFile;
+        handlePrev(); //to bring back seek to 0
+      }
+      setCurrentSongIndex(0);
+      setIsPlaying(true);
+    } catch (err) {
+      console.log(err);
+      setErr("Something went wrong...");
+    }
+  };
+
   return (
     <SongContext.Provider
       value={{
@@ -92,6 +108,7 @@ const SongProvider = ({ children }) => {
         handlePrev,
         handleNext,
         err,
+        playTheList,
       }}
     >
       {children}

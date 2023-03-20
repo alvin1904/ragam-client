@@ -41,7 +41,7 @@
 .song_card {
   padding: 10px 25px;
   border-radius: 5px;
-  height: auto;
+  height: 65px;
   width: 100%;
   background-color: var(--color-ui-500);
   background: linear-gradient(

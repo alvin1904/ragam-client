@@ -8,7 +8,7 @@ import {
   MdInfo,
 } from "react-icons/md";
 import { defaultSettings } from "./config";
-import './ErrorHandler.css'
+import "./ErrorHandler.css";
 
 export default function ErrorHandler({
   show = defaultSettings.show,
@@ -24,6 +24,7 @@ export default function ErrorHandler({
   };
   const Icon = icons[types];
   const display = <Icon size={25} className={`${types}1904`} />;
+  if (message == "jwt expired") alert("Please login again");
   return (
     <div
       className={`error_handler_1904 ${show && "show1904"} ${

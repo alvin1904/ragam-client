@@ -21,7 +21,7 @@ export default function ExpandPlaylist() {
           setData({});
         }}
       >
-        <IoClose size={25} />
+        <IoClose size={35} />
       </div>
     </div>
   );

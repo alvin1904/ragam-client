@@ -1,0 +1,55 @@
+.playlist_title {
+  height: 200px;
+  border-radius: 0px 0px 8px 8px;
+  display: grid;
+  align-items: end;
+  padding: 0 40px;
+  transition: all 250ms ease-in-out;
+}
+.playlist_title div{
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+.playlist_title div button{
+  all: unset;
+  cursor: pointer;
+}
+.playlist_title div button svg{
+  transition: all 250ms ease-in-out;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.playlist_title div button svg:hover{
+  fill: #00ff59;
+  background-color: white;
+}
+.playlist_title h1 {
+  font-size: 4.5rem;
+  /* transform: translate(15px, 95px); */
+  font-weight: 200;
+}
+.playlist_songs_list {
+  overflow-y: scroll;
+  height: 100%;
+  width: 100%;
+  padding: 0rem 0.55rem 13rem 0.25rem;
+}
+.song_card_template {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr auto;
+  font-size: 1.25rem;
+  font-weight: 500;
+  height: 55px;
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+  align-items: center;
+  padding: 0 2rem;
+  margin: 1.25rem 0;
+}
+.songcard_template_like_plus{
+  display: grid;
+  grid-auto-flow: column;
+  gap: 1rem;
+}
