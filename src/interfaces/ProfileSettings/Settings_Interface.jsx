@@ -38,9 +38,11 @@ export default function Settings() {
   });
 
   const handleUsername = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (!changeCredentials.name)
       return showMessage("No username entered to change!");
+    else if (changeCredentials.name.length < 4)
+      return showMessage("Min. 4 characters for name!",themes.light, types.warning);
 
     let data = { name: changeCredentials.name };
     try {
@@ -64,7 +66,7 @@ export default function Settings() {
   };
 
   const handlePassword = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (changeCredentials.password1.length < 6) {
       return showMessage("The passsword should be atleast 6 characters long");
     } else if (changeCredentials.password1 != changeCredentials.password2) {

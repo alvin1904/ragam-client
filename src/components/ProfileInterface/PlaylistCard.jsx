@@ -4,7 +4,7 @@ import { HiTrash } from "react-icons/hi";
 
 export default function PlaylistCard({ data, handleDelete, handleOpen }) {
   return (
-    <div className="playlistcard pcard currently_playing">
+    <div className="playlistcard pcard gradient_0">
       <p onClick={handleOpen}>{data.name}</p>
       <HiTrash
         size={25}

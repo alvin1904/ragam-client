@@ -57,36 +57,27 @@ const SongProvider = ({ children }) => {
     audioRef.current?.play();
     setIsPlaying(true);
   };
-  const handleNext = () => {
+
+  const handleNext = (index) => {
     if (!audioRef.current.paused) audioRef.current.pause();
-    if (currentSongIndex === songs.length - 1) setFetch(true);
-    else {
+    if (typeof index !== "number" || index === undefined) {
       if (currentSongIndex === songs.length - 1) {
         setSongs([]);
         setFetch(true);
+        return;
       } else {
-        audioRef.current.src = songs[currentSongIndex + 1].songFile;
-        setCurrentSongIndex(currentSongIndex + 1);
-        audioRef.current.play();
-        setIsPlaying(true);
+        index = currentSongIndex + 1;
       }
     }
-  };
-  const handleNextCustom = (index) => {
-    console.log(index);
-    console.log(currentSongIndex + 1);
-    if (!audioRef.current.paused) audioRef.current.pause();
-    if (
-      currentSongIndex === songs.length - 1 &&
-      index !== currentSongIndex + 1
-    ) {
-      setSongs([]);
-      setFetch(true);
-    } else {
+
+    if (index >= 0 && index <= songs.length - 1) {
       audioRef.current.src = songs[index].songFile;
       setCurrentSongIndex(index);
       audioRef.current.play();
       setIsPlaying(true);
+    } else {
+      setSongs([]);
+      setFetch(true);
     }
   };
 
@@ -100,7 +91,6 @@ const SongProvider = ({ children }) => {
         setIsPlaying,
         handlePrev,
         handleNext,
-        handleNextCustom,
         err,
       }}
     >

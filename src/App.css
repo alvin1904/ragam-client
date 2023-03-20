@@ -26,7 +26,6 @@ body {
 .hover_effect_1, .audio_btn {
   color: #bfbfbf;
   opacity: 1;
-  transition: 250ms ease-in-out;
 }
 .hover_effect_1:hover, .audio_btn:hover {
   color: white;

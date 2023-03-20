@@ -60,6 +60,17 @@
     rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
   transition: all 350ms ease-in-out;
 }
+.gradient_0 {
+  background: linear-gradient(
+    225deg,
+    var(--color-ui-800) 0%,
+    var(--color-ui-400) 40%,
+    var(--color-ui-shade) 100%
+    );
+}
+.gradient_0:hover {
+  background: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
+}
 .song_card:hover {
   background: linear-gradient(
     225deg,
@@ -205,9 +216,9 @@
     padding-top: 5px;
   }
 }
-.songcard_like_plus{
+.songcard_like_plus {
   display: grid;
   grid-auto-flow: column;
   align-items: center;
-  gap: 0.5rem
+  gap: 0.5rem;
 }

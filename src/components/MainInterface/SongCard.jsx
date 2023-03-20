@@ -4,9 +4,9 @@ import { AiFillHeart, AiOutlineHeart, AiOutlinePlus } from "react-icons/ai";
 import PlaylistAdder from "../../components/PlaylistAdder/PlaylistAdder";
 
 const SongCard = ({ song, index, playlists }) => {
-  const { handleNextCustom, currentSongIndex } = useSongsContext();
+  const { handleNext, currentSongIndex } = useSongsContext();
   const [liked, setLiked] = useState(false);
-  const [show, setShow] = useState(false);
+  const [shows, setShows] = useState(false);
   const { artist, songName } = song;
   return (
     <div
@@ -16,7 +16,7 @@ const SongCard = ({ song, index, playlists }) => {
     >
       <div
         onClick={() => {
-          handleNextCustom(index);
+          handleNext(index);
         }}
       >
         <h1>{songName}</h1>
@@ -25,13 +25,13 @@ const SongCard = ({ song, index, playlists }) => {
       <div className="songcard_like_plus">
         <div
           onMouseEnter={() => {
-            setShow(true);
+            setShows(true);
           }}
           onMouseLeave={() => {
-            setShow(false);
+            setShows(false);
           }}
         >
-          <PlaylistAdder show={show} playlists={playlists} song_id={song._id}/>
+          <PlaylistAdder shows={shows} playlists={playlists} song_id={song._id}/>
           <AiOutlinePlus size={25} />
         </div>
         {liked ? (

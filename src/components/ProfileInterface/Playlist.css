@@ -3,7 +3,6 @@
   height: 3.6em;
   border-radius: 5px;
   cursor: pointer;
-  transition: 250ms all ease-in-out;
   overflow: hidden;
   margin-top: 0.5rem;
 }
