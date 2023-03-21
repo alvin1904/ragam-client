@@ -6,29 +6,29 @@ import SongCardComponent from "../MainInterface/SongCardComponent";
 import { useSongsContext } from "../../context/songContext";
 
 export default function PlayListDetails({ data }) {
-  const [details, setDetails] = useState(data[0]);
+  const [details, setDetails] = useState(data);
   const gradient = getRandomNumber(1, 7);
   const { playTheList } = useSongsContext();
 
-
   const handlePlay = () => {
-    playTheList(details.songs);
+    details.songs && playTheList(details.songs);
   };
 
   return (
     <>
       <div className={`playlist_title gradient_${gradient}`}>
         <div>
-          <h1>{details.name}</h1>
+          <h1>{details.name ? details.name : ""}</h1>
           <button onClick={handlePlay}>
             <AiFillPlayCircle size={55} />
           </button>
         </div>
       </div>
       <div className="playlist_songs_list">
-        {details.songs.map((song) => {
-          return <SongCardComponent key={song._id} song={song} />;
-        })}
+        {details.name &&
+          details.songs.map((song) => {
+            return <SongCardComponent key={song._id} song={song} />;
+          })}
       </div>
     </>
   );

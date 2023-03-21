@@ -89,9 +89,9 @@ const Controller = () => {
                 <h1 className="song_name ">
                   {songs[currentSongIndex].songName}
                 </h1>
-                {/* <p className="song_artist hover_effect_1">
+                <p className="song_artist hover_effect_1">
                   {songs[currentSongIndex]?.artist[0]?.name}
-                </p> */}
+                </p>
               </div>
             </div>
 
