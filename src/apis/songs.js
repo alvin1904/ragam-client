@@ -20,9 +20,9 @@ export const getSong = async (id) => {
     return err;
   }
 };
-export const getAlbums = async () => {
+export const getAlbums = async (count) => {
   try {
-    const response = await getAlbumsApi();
+    const response = await getAlbumsApi(count);
     console.log(response);
     return response;
   } catch (err) {

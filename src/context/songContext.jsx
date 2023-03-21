@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { getSongs } from "../apis/songs";
+import { getAlbums, getSongs } from "../apis/songs";
 
 const SongContext = React.createContext();
 
@@ -42,6 +42,24 @@ const SongProvider = ({ children }) => {
   useEffect(() => {
     if (songs.length == 0 || currentSongIndex >= songs.length - 1)
       setFetch(true);
+  }, []);
+
+  const [fetch2, setFetch2] = useState(false);
+  const [albums, setAlbums] = useState([]);
+  // FETCH SONGS
+  const fetchAlbums = useCallback(async () => {
+    const res = await getAlbums(6);
+    if (res.status === 200) {
+      setAlbums(res.data);
+      setFetch2(false);
+      console.log(res.data);
+    }
+  }, []);
+  useEffect(() => {
+    if (fetch2) fetchAlbums();
+  }, [fetch2]);
+  useEffect(() => {
+    setFetch2(true);
   }, []);
 
   // PLAY / PAUSE
@@ -109,6 +127,7 @@ const SongProvider = ({ children }) => {
         handleNext,
         err,
         playTheList,
+        albums,
       }}
     >
       {children}

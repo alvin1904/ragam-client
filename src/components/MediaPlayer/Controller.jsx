@@ -80,17 +80,18 @@ const Controller = () => {
           <div className="audio_controls">
             <div className="audio_details">
               <div className="song_image">
-              <img
+                <img
                   src={songs[currentSongIndex].songImage || songDefImg}
                 ></img>
-                </div>
-                
-                <div className="song_title">
+              </div>
+
+              <div className="song_title">
                 <h1 className="song_name ">
                   {songs[currentSongIndex].songName}
                 </h1>
                 <p className="song_artist hover_effect_1">
-                  {songs[currentSongIndex]?.artist[0]?.name}
+                  {songs[currentSongIndex].artist &&
+                    songs[currentSongIndex].artist[0].name}
                 </p>
               </div>
             </div>

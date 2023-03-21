@@ -27,7 +27,8 @@ export const updatePassword = (data) =>
 export const getSongsApi = (count) =>
   api.get(`/user-services/songs?count=${count}`);
 export const getSongApi = (id) => api.get(`/song/${id}`);
-export const getAlbumsApi = () => api.get(`/user-services/albums`);
+export const getAlbumsApi = (count) =>
+  api.get(`/user-services/albums?count=${count}`);
 export const getAlbumApi = (id) => api.get(`/user-services/albums/${id}`);
 
 // PLAYLISTS

@@ -79,14 +79,14 @@
   grid-template-columns: 1fr auto;
   align-items: center;
   gap: 0.5rem;
-  max-width: 600px;
+  max-width: 400px;
   margin-bottom: 1rem;
 }
 .searchbar > input {
   background-color: var(--color-ui-shade);
   border-radius: 5px;
   height: 40px;
-  min-width: 400px;
+  min-width: 300px;
   padding: 0px 10px;
   font-size: 1.2rem;
   color: white;
@@ -150,14 +150,13 @@
 .search_result_sections {
   overflow: hidden;
 }
-.expanded > .section_list {
-}
+
 .notexpanded > .section_list {
   display: none;
 }
 .expanded > div > .icon {
-  transform: rotate(0deg);
+  transform: rotate(180deg);
 }
 .notexpanded > div > .icon {
-  transform: rotate(180deg);
+  transform: rotate(0deg);
 }

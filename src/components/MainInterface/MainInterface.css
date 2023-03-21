@@ -66,7 +66,7 @@
     var(--color-ui-800) 0%,
     var(--color-ui-400) 40%,
     var(--color-ui-shade) 100%
-    );
+  );
 }
 .gradient_0:hover {
   background: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
@@ -160,30 +160,49 @@
 .album_card {
   height: 180px;
   width: 100%;
+  max-width: 180px;
   border-radius: 6px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   padding: 10px;
   overflow: hidden;
   cursor: pointer;
-  transition: all 450ms cubic-bezier(0.57, 0.21, 0.69, 1.25);
+  transition: 200ms cubic-bezier(0.57, 0.21, 0.69, 1.25);
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-rows: 1fr auto;
 }
 .album_card:hover {
-  padding-top: 20px;
+  scale: 1.05;
 }
-.album_card:hover p {
-  padding-top: 18px;
+.album_card_details {
+  grid-auto-flow: row;
+  grid-template-rows: 0.8fr auto;
+  align-items: last baseline;
 }
 .album_card h1 {
-  font-size: 2.05rem;
+  max-width: 75%;
+  max-height: 50%;
+  text-overflow: ellipsis;
+  font-size: 1.4rem;
   font-weight: 700;
-  line-height: 35px;
-  word-wrap: break-word;
+  word-wrap: normal;
 }
 .album_card p {
-  transition: all 450ms cubic-bezier(0.57, 0.21, 0.69, 1.25);
-  font-size: 1.15rem;
+  transition: all 450ms cubic-bezier(0.39, 1.52, 0.46, 0.92);
+  font-size: 1rem;
   font-weight: 500;
   margin-top: 20px;
+  text-transform: uppercase;
+}
+.play_button {
+  display: grid;
+  position: relative;
+  justify-content: center;
+  transform: translateY(100px);
+  transition: 450ms cubic-bezier(0.39, 1.52, 0.46, 0.92);
+}
+.album_card:hover .play_button {
+  transform: translateY(-5px);
 }
 @media (max-width: 480px) {
   .main_albums_list {
