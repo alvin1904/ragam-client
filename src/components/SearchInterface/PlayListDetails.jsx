@@ -27,7 +27,7 @@ export default function PlayListDetails({ data }) {
       <div className="playlist_songs_list">
         {details.name &&
           details.songs.map((song) => {
-            return <SongCardComponent key={song._id} song={song} />;
+            return <SongCardComponent key={song._id} song={song} showdelete={true}/>;
           })}
       </div>
     </>

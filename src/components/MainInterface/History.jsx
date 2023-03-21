@@ -8,8 +8,24 @@ import {
   useSpringRef,
 } from "@react-spring/web";
 import { getAllPlaylists } from "../../apis/playlist";
+import ErrorHandler from "../ErrorHandler/ErrorHandler";
 
 const History = () => {
+  //ERROR HANDLER START
+const [show, setShow] = useState(false);
+const [messageProps, setMessageProps] = useState({});
+const showMessage = (text, theme, type) => {
+  setMessageProps({ message: text, themes: theme, types: type });
+  setShow(true);
+};
+useEffect(() => {
+  if (show) {
+    const timeout = setTimeout(() => setShow(false), 3000);
+    return () => clearTimeout(timeout);
+  }
+}, [show]);
+//ERROR HANDLER END
+
   const [playlists, setPlaylists] = useState([]);
   const [fetch, setFetch] = useState(true);
   useEffect(() => {
@@ -39,6 +55,7 @@ const History = () => {
 
   return (
     <div className="main_section">
+      <ErrorHandler show={show} {...messageProps} />
       <h1 className="main_section_heading">Up next...</h1>
       <div className="main_songs_list">
         {songs &&

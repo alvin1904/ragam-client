@@ -42,3 +42,6 @@ export const getFromPlaylistsApi = (id) => api.get(`/playlists/${id}`);
 export const LikeSongApi = (id) => api.post(`/user-services/songs/like/${id}`);
 export const DislikeSongApi = (id) =>
   api.post(`/user-services/songs/remove-like/${id}`);
+
+// SEARCH
+export const searchApi = (keyword) => api.get(`/search/${keyword}`);
