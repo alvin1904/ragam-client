@@ -64,7 +64,7 @@ export default function Profile_Interface({ changeInterface }) {
           <h1 className="profile_welcome">Playlists created by you</h1>
           <div className="main_songs_list">
             <CreatePlaylistCard addToPlaylists={addToPlaylists} />
-            {playlists && playlists.length !== 0 ? (
+            {playlists ? (
               playlists.map((playlist, index) => {
                 return (
                   <PlaylistCard

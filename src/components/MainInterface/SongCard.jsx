@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useSongsContext } from "../../context/songContext";
-import { AiFillHeart, AiOutlineHeart, AiOutlinePlus } from "react-icons/ai";
+import { AiOutlinePlus } from "react-icons/ai";
 import PlaylistAdder from "../../components/PlaylistAdder/PlaylistAdder";
+import LikeButton from "./Like/LikeButton";
 
 const SongCard = ({ song, index, playlists }) => {
   const { handleNext, currentSongIndex } = useSongsContext();
@@ -30,28 +31,18 @@ const SongCard = ({ song, index, playlists }) => {
             setShows(false);
           }}
         >
-          <PlaylistAdder
-            shows={shows}
-            playlists={playlists}
-            song_id={song._id}
-          />
-          {playlists && <AiOutlinePlus size={25} />}
+          {playlists && playlists.length !== 0 && (
+            <>
+              <PlaylistAdder
+                shows={shows}
+                playlists={playlists}
+                song_id={song._id}
+              />
+              <AiOutlinePlus size={25} />
+            </>
+          )}
         </div>
-        {liked ? (
-          <AiFillHeart
-            size={25}
-            onClick={() => {
-              setLiked(false);
-            }}
-          />
-        ) : (
-          <AiOutlineHeart
-            size={25}
-            onClick={() => {
-              setLiked(true);
-            }}
-          />
-        )}
+        {song._id && <LikeButton liked={song.liked} songId={song._id} />}
       </div>
     </div>
   );
