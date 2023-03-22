@@ -7,7 +7,7 @@ import { deletePlaylist, getAllPlaylists } from "../../apis/playlist";
 import ErrorHandler from "../../components/ErrorHandler/ErrorHandler";
 import { themes, types } from "../../components/ErrorHandler/config";
 import { usePlayListContext } from "../../context/PlaylistContext";
-import Loading from '../../components/Loader/Loading'
+import Loading from "../../components/Loader/Loading";
 
 export default function Profile_Interface({ changeInterface }) {
   //ERROR HANDLER START
@@ -54,7 +54,7 @@ export default function Profile_Interface({ changeInterface }) {
     else showMessage((res.response && res.response.data.error) || res.message);
     setFetch(true);
   };
-  
+
   return (
     <div className="interface_inside">
       <ErrorHandler show={show} {...messageProps} />
@@ -64,6 +64,15 @@ export default function Profile_Interface({ changeInterface }) {
           <h1 className="profile_welcome">Playlists created by you</h1>
           <div className="main_songs_list">
             <CreatePlaylistCard addToPlaylists={addToPlaylists} />
+            <PlaylistCard
+              key={-100}
+              data={{ name: "Liked Songs", _id: "liked" }}
+              handleDelete={handleDelete}
+              handleOpen={() => {
+                setViewPlaylist("liked");
+                changeInterface("Search_Interface");
+              }}
+            />
             {playlists ? (
               playlists.map((playlist, index) => {
                 return (

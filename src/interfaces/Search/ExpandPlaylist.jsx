@@ -6,11 +6,10 @@ import Loading from "../../components/Loader/Loading";
 
 export default function ExpandPlaylist() {
   const { data, setViewPlaylist, setData } = usePlayListContext();
-  console.log(data)
   return (
     <div className="search_component">
       {data && Object.keys(data).length !== 0 ? (
-        <PlayListDetails data={data} />
+        <PlayListDetails />
       ) : (
         <Loading />
       )}

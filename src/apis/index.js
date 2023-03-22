@@ -35,6 +35,8 @@ export const getAlbumApi = (id) => api.get(`/user-services/albums/${id}`);
 export const createPlaylistsApi = (data) => api.post("/playlists", data);
 export const updatePlaylistsApi = (id, data) =>
   api.patch(`/playlists/${id}`, data);
+export const removeFromPlaylistsApi = (id, data) =>
+  api.patch(`/playlists/remove/${id}`, data);
 export const deletePlaylistsApi = (id) => api.delete(`/playlists/${id}`);
 export const getAllPlaylistsApi = () => api.get("/playlists");
 export const getFromPlaylistsApi = (id) => api.get(`/playlists/${id}`);
@@ -42,7 +44,9 @@ export const getFromPlaylistsApi = (id) => api.get(`/playlists/${id}`);
 // LIKE
 export const LikeSongApi = (id) => api.post(`/user-services/songs/like/${id}`);
 export const DislikeSongApi = (id) =>
-  api.post(`/user-services/songs/remove-like/${id}`);
+api.post(`/user-services/songs/remove-like/${id}`);
+export const LikedSongsApi = () => api.get(`/user-services/liked`);
+
 
 // SEARCH
 export const searchApi = (keyword) => api.get(`/search/${keyword}`);

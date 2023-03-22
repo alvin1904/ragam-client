@@ -4,8 +4,12 @@ import getRandomNumber from "../../utils/randomNumber";
 import "./SearchComponents.css";
 import SongCardComponent from "../MainInterface/SongCardComponent";
 import { useSongsContext } from "../../context/songContext";
+import { DislikeSong } from "../../apis/like";
+import { removeFromPlaylist } from "../../apis/playlist";
+import { usePlayListContext } from "../../context/PlaylistContext";
 
-export default function PlayListDetails({ data }) {
+export default function PlayListDetails() {
+  const { data } = usePlayListContext();
   const [details, setDetails] = useState(data);
   const gradient = getRandomNumber(1, 7);
   const { playTheList } = useSongsContext();
@@ -13,7 +17,18 @@ export default function PlayListDetails({ data }) {
   const handlePlay = () => {
     details.songs && playTheList(details.songs);
   };
-
+  const handleDelete = async (id) => {
+    let res;
+    if (details.name == "Liked Songs") res = await DislikeSong(id);
+    else res = await removeFromPlaylist(details._id, { songsId: [`${id}`] });
+    if (res.status == 200) {
+      let temp = [...details.songs];
+      temp = temp.filter((song) => song._id !== id);
+      console.log(temp);
+      setDetails({ songs: [...temp], ...details });
+    } else console.log("error handle");
+    console.log(details);
+  };
   return (
     <>
       <div className={`playlist_title gradient_${gradient}`}>
@@ -27,7 +42,14 @@ export default function PlayListDetails({ data }) {
       <div className="playlist_songs_list">
         {details.name &&
           details.songs.map((song) => {
-            return <SongCardComponent key={song._id} song={song} showdelete={true}/>;
+            return (
+              <SongCardComponent
+                key={song._id}
+                song={song}
+                showdelete={true}
+                handleDelete={handleDelete}
+              />
+            );
           })}
       </div>
     </>
