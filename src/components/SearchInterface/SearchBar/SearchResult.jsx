@@ -3,8 +3,10 @@ import Loading from "../../Loader/Loading";
 import NotFound from "../../../assets/notfound.gif";
 import SongCardComponent from "../../MainInterface/SongCardComponent";
 import { BiChevronDown } from "react-icons/bi";
+import { BsFillPlayCircleFill } from "react-icons/bs";
 import getRandomNumber from "../../../utils/randomNumber";
 import AlbumCard from "../../MainInterface/AlbumCard";
+import { useSongsContext } from "../../../context/songContext";
 
 export default function SearchResult({ loading, searchData }) {
   if (loading)
@@ -34,6 +36,11 @@ export default function SearchResult({ loading, searchData }) {
     const MusicLister = ({ filter, name }) => {
       const [expanded, setExpanded] = useState(false);
       let sample = temp[filter];
+      const { playTheList } = useSongsContext();
+      const handlePlay = () => {
+        setExpanded(true);
+        playTheList(sample);
+      };
       if (sample && sample.length > 0)
         return (
           <div
@@ -48,6 +55,9 @@ export default function SearchResult({ loading, searchData }) {
               }}
             >
               <div>Search results by {`${name} (${sample.length})`}</div>
+              <div className="play_button_search" onClick={handlePlay}>
+                <BsFillPlayCircleFill size={25} />
+              </div>
               <div className="icon">
                 <BiChevronDown size={35} />
               </div>
@@ -84,6 +94,7 @@ export default function SearchResult({ loading, searchData }) {
               }}
             >
               <div>Search results by {`${name} (${sample.length})`}</div>
+              <div></div>
               <div className="icon">
                 <BiChevronDown size={35} />
               </div>

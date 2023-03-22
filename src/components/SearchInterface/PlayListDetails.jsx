@@ -15,7 +15,7 @@ export default function PlayListDetails() {
   const { playTheList } = useSongsContext();
 
   const handlePlay = () => {
-    details.songs && playTheList(details.songs);
+    details.songs && details.songs.length > 0 && playTheList(details.songs);
   };
   const handleDelete = async (id) => {
     let res;

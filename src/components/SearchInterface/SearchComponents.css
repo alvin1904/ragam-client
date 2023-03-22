@@ -137,7 +137,7 @@
   padding: 0 10px;
   display: grid;
   align-items: center;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr auto auto;
   font-size: 1.25rem;
   position: relative;
   z-index: 100;
@@ -150,7 +150,6 @@
 .search_result_sections {
   overflow: hidden;
 }
-
 .notexpanded > .section_list {
   display: none;
 }
@@ -159,4 +158,10 @@
 }
 .notexpanded > div > .icon {
   transform: rotate(0deg);
+}
+.play_button_search{
+  background-color: var(--color-ui-800);
+  position: absolute;
+  z-index: 20;
+  right: 4em;
 }

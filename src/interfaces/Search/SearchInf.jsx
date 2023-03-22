@@ -33,7 +33,7 @@ export default function SearchInf() {
       console.log(res);
       if (res.status == 200) {
         setSearchData(res.data);
-      } else if (res.response.status == 400) {
+      } else if (res.response && res.response.status == 400) {
         showMessage("Search request timed out!");
       } else {
         showMessage((res.response && res.response.data.error) || res.message);
