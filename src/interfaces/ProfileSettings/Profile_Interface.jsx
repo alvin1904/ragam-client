@@ -73,25 +73,27 @@ export default function Profile_Interface({ changeInterface }) {
                 changeInterface("Search_Interface");
               }}
             />
-            {playlists ? (
-              playlists.map((playlist, index) => {
-                return (
-                  <PlaylistCard
-                    key={index}
-                    data={playlist}
-                    handleDelete={handleDelete}
-                    handleOpen={() => {
-                      setViewPlaylist(playlist._id);
-                      changeInterface("Search_Interface");
-                    }}
-                  />
-                );
-              })
-            ) : (
-              <div>
-                <Loading />
-              </div>
-            )}
+            {playlists &&
+              (playlists.length > 0 ? (
+                playlists.map((playlist, index) => {
+                  return (
+                    <PlaylistCard
+                      key={index}
+                      data={playlist}
+                      handleDelete={handleDelete}
+                      handleOpen={() => {
+                        setViewPlaylist(playlist._id);
+                        changeInterface("Search_Interface");
+                      }}
+                    />
+                  );
+                })
+              ) : (
+                <div>
+                  <br></br>
+                  <Loading />
+                </div>
+              ))}
           </div>
         </div>
       </div>

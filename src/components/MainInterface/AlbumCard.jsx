@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BsFillPlayCircleFill } from "react-icons/bs";
 import { getAlbum } from "../../apis/songs";
 import { useSongsContext } from "../../context/songContext";
+import Loading from "../Loader/Loading";
 
 const AlbumCard = ({ gradient, album }) => {
   //ERROR HANDLER START
@@ -20,10 +21,13 @@ const AlbumCard = ({ gradient, album }) => {
   //ERROR HANDLER END
 
   const { playTheList } = useSongsContext();
+  const [loading, setLoading] = useState(false);
   const handlePlay = async () => {
+    setLoading(true);
     let res = await getAlbum(album._id);
     if (res.status == 200) {
       playTheList(res.data);
+      setLoading(false);
     } else {
       showMessage((res.response && res.response.data.error) || res.message);
     }
@@ -36,7 +40,7 @@ const AlbumCard = ({ gradient, album }) => {
           <p>{album.artist[0].name}</p>
         </div>
         <div className="play_button">
-          <BsFillPlayCircleFill size={40} />
+          {loading ? <Loading /> : <BsFillPlayCircleFill size={40} />}
         </div>
       </div>
     </>
