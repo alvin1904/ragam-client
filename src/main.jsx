@@ -3,8 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import { disableReactDevTools } from "@fvilers/disable-react-devtools";
-let NODE_ENV = "production";
-if (NODE_ENV === "production") disableReactDevTools();
+if (import.meta.env.NODE_ENV === "production") disableReactDevTools();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

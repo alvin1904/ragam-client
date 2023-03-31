@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-  // baseURL: "http://localhost:5000/api/v1",
-  baseURL: "https://music-streaming-server.onrender.com/api/v1",
+  baseURL: "http://localhost:5000/api/v1",
+  // baseURL: import.meta.env.BASE_URL,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
@@ -41,7 +41,7 @@ export const getAllPlaylistsApi = () => api.get("/playlists");
 export const getFromPlaylistsApi = (id) => api.get(`/playlists/${id}`);
 
 // LIKE
-export const LikeSongApi = (id) => api.post(`/user-services/songs/like/${id}`);
+export const LikeSongApi = (id) => api.post(`/user-services/songs/like/s${id}`);
 export const DislikeSongApi = (id) =>
   api.post(`/user-services/songs/remove-like/${id}`);
 export const LikedSongsApi = () => api.get(`/user-services/liked`);

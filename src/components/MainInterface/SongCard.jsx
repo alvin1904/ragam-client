@@ -6,7 +6,6 @@ import LikeButton from "./Like/LikeButton";
 
 const SongCard = ({ song, index, playlists }) => {
   const { handleNext, currentSongIndex } = useSongsContext();
-  const [liked, setLiked] = useState(song.liked || false);
   const [shows, setShows] = useState(false);
   return (
     <div

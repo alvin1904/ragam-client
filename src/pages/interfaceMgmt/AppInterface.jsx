@@ -1,5 +1,4 @@
 import "./AppInterface.css";
-import Navbar from "../../layouts/Navbar";
 import Sidebar from "../../layouts/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -32,7 +31,6 @@ const AppInterface = () => {
           navigate("/login");
         }
       } catch (err) {
-        console.log(err);
       }
     } else {
       setInterfaceSelected(target);
@@ -41,7 +39,6 @@ const AppInterface = () => {
 
   return (
     <div className="interface">
-      <Navbar />
       <Sidebar
         interfaces={interfaceSelected}
         changeInterface={changeInterface}

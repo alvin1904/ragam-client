@@ -37,7 +37,7 @@ const AlbumCard = ({ gradient, album }) => {
       <div className={`album_card gradient_${gradient}`} onClick={handlePlay}>
         <div className="album_card_details">
           <h1>{album.albumName && album.albumName}</h1>
-          <p>{album.artist[0].name}</p>
+          <p>{album.artist && album.artist.length>0 && album.artist[0].name}</p>
         </div>
         <div className="play_button">
           {loading ? <Loading /> : <BsFillPlayCircleFill size={40} />}

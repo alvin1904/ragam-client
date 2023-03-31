@@ -30,7 +30,6 @@ export default function SearchInf() {
     setLoading(true);
     if (searchRef.current.value !== "") {
       const res = await SearchData(searchRef.current.value);
-      console.log(res);
       if (res.status == 200) {
         setSearchData(res.data);
       } else if (res.response && res.response.status == 400) {

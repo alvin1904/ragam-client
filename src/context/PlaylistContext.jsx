@@ -12,12 +12,10 @@ const PlayListProvider = ({ children }) => {
     const fetchData = async () => {
       const res = await getPlayListDetails(viewPlayList);
       if (res.status == 200) setData({ ...res.data, _id: viewPlayList });
-      else console.log("error handle");
     };
     const fetchData2 = async () => {
       const res = await getLikedSongs();
       if (res.status == 200) setData({ name: "Liked Songs", songs: res.data });
-      else console.log("error handle");
     };
     if (viewPlayList !== "" && viewPlayList !== "liked") fetchData();
     if (viewPlayList !== "" && viewPlayList === "liked") fetchData2();

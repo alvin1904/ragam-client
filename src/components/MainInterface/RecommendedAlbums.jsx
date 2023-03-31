@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import AlbumCard from "./AlbumCard";
 import getRandomNumber from "../../utils/randomNumber";
 import { useSongsContext } from "../../context/songContext";

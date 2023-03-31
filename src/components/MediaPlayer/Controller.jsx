@@ -3,7 +3,6 @@ import Controls from "./Controls";
 import { useState, useEffect } from "react";
 import ErrorHandler from "../ErrorHandler/ErrorHandler";
 import { useSongsContext } from "../../context/songContext";
-import { themes, types } from "../ErrorHandler/config";
 import Loading from "../Loader/Loading";
 
 const Controller = () => {

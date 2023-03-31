@@ -1,5 +1,5 @@
 //for playlist expand
-import React, { useState } from "react";
+import React from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 
 const SongCardComponent = ({ song, showdelete, handleDelete }) => {

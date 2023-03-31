@@ -25,7 +25,6 @@ export default function PlaylistAdder({ shows, playlists, song_id }) {
     let temp = {};
     temp.songsId = [song_id];
     const res = await addToPlaylist(id, temp);
-    console.log(res);
     if (res.status == 200)
       showMessage(
         "Song successfully added to playlist",

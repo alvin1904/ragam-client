@@ -60,8 +60,7 @@ export default function Settings() {
         types.success
       );
     } catch (err) {
-      console.log(res);
-      showMessage((res.response && res.response.data.error) || res.message);
+      showMessage((err.response && err.response.data.error) || err.message);
     }
   };
 
@@ -78,7 +77,6 @@ export default function Settings() {
     };
     try {
       const res = await updatePassword(body);
-      console.log(res);
       setChangedCredentials({
         ...changeCredentials,
         password: "",
@@ -94,7 +92,6 @@ export default function Settings() {
       else
         showMessage((res.response && res.response.data.error) || res.message);
     } catch (res) {
-      console.log(res);
       showMessage((res.response && res.response.data.error) || res.message);
     }
   };

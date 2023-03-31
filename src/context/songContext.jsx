@@ -52,7 +52,6 @@ const SongProvider = ({ children }) => {
     if (res.status === 200) {
       setAlbums(res.data);
       setFetch2(false);
-      console.log(res.data);
     }
   }, []);
   useEffect(() => {
@@ -110,7 +109,6 @@ const SongProvider = ({ children }) => {
       setCurrentSongIndex(0);
       setIsPlaying(true);
     } catch (err) {
-      console.log(err);
       setErr("Something went wrong...");
     }
   };

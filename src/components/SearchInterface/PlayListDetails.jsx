@@ -24,10 +24,8 @@ export default function PlayListDetails() {
     if (res.status == 200) {
       let temp = [...details.songs];
       temp = temp.filter((song) => song._id !== id);
-      console.log(temp);
       setDetails({ songs: [...temp], ...details });
-    } else console.log("error handle");
-    console.log(details);
+    }
   };
   return (
     <>

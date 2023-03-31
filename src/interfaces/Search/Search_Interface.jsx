@@ -4,7 +4,7 @@ import SearchInf from "./SearchInf";
 import ExpandPlaylist from "./ExpandPlaylist";
 
 export default function Search_Interface({ changeInterface }) {
-  const { viewPlayList, setViewPlaylist, setData } = usePlayListContext();
+  const { viewPlayList} = usePlayListContext();
   const [search, setSearch] = useState(true);
   useEffect(() => {
     const decide = () => {
@@ -16,11 +16,6 @@ export default function Search_Interface({ changeInterface }) {
     };
 
     decide();
-
-    // return () => {
-    //   setSearch(true);
-    //   setData({});
-    // };
   }, [viewPlayList]);
   return (
     <div className="interface_inside">
