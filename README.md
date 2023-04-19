@@ -1,5 +1,5 @@
 # :musical_note: RAGAM Music App
-![Screenshot 1](public/mockup.png)
+<img src="public/mockup.png" height="640" width="1280" alt="mockup">
 
 RAGAM is a music streaming and curation app built using the MERN stack. It allows users to stream music, create playlists, add songs to them, and search for songs from a vast list of available tracks. Additionally, RAGAM can generate a random playlist for users who want to discover new music. 
 
@@ -59,20 +59,25 @@ We used the MERN Stack as the core of our application. The full list of framewor
 
 Here are some screenshots of our RAGAM Music App:
 
-![Screenshot 1](public/ss1.png)
+<img src="public/ss1.png" width="1280" alt="Login"></img>
 _Users can login or register here_
+<br></br>
 
-![Screenshot 2](public/ss2.png)
+<img src="public/ss2.png" width="1280" alt="Login"></img>
 _This is the application's main interface and welcome screen. Users can interact fully with the app here._
+<br></br>
 
-![Screenshot 3](public/ss3.png)
+<img src="public/ss3.png" width="1280" alt="Login"></img>
 _This is the search feature, which allows users to look for a specific song or playlist._
+<br></br>
 
-![Screenshot 4](public/ss4.png)
+<img src="public/ss4.png" width="1280" alt="Login"></img>
 _This is the profile page, where users can view their profile details and create and delete their own playlists where they can keep the songs they like._
+<br></br>
 
-![Screenshot 5](public/ss6.png)
+<img src="public/ss6.png" width="1280" alt="Login"></img>
 _Viewing songs in a playlist_
+<br></br>
 
 ## Contributors
 
