@@ -20,10 +20,10 @@ The client side of the app is built using REACT framework. The client is deploye
 ## Important Links
 
 - Visit website @ https://ragam.netlify.app/
-- Visit companion website @ https://ragam-companion.netlify.app/
+<!-- - Visit companion website @ https://ragam-companion.netlify.app/ -->
 - Visit API repo @ https://github.com/sm0483/music-app-server.git
 - Visit Client repo @ https://github.com/alvin1904/Ragam-Music-Streaming-App.git
-- Visit Companion repo @ https://github.com/alvin1904/Ragam-Companion.git
+<!-- - Visit Companion repo @ https://github.com/alvin1904/Ragam-Companion.git -->
 
 ## Configuration for Local Deployment
 
