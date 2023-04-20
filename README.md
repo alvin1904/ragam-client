@@ -1,5 +1,5 @@
 # :musical_note: RAGAM Music App
-<img src="public/mockup.png" height="640" width="1280" alt="mockup">
+<img src="public/mockup.png" width="1280" alt="mockup">
 
 RAGAM is a music streaming and curation app built using the MERN stack. It allows users to stream music, create playlists, add songs to them, and search for songs from a vast list of available tracks. Additionally, RAGAM can generate a random playlist for users who want to discover new music. 
 
